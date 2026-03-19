@@ -1685,6 +1685,40 @@ window.history.pushState(null, '', newUrl);
         )}
       </main>
 
+      {/* 🌟 新增：右側浮動快捷鍵 */}
+      <div className="fixed bottom-6 right-4 z-50 flex flex-col gap-3">
+        {/* IG 按鈕 */}
+        <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="IG" className="w-7 h-7" />
+        </a>
+        
+        {/* LINE 按鈕 */}
+        <a href="https://lin.ee/3FkHbsvk" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform p-1">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" alt="LINE" className="w-full h-full object-contain" />
+        </a>
+
+        {/* 購物車按鈕 */}
+        <button 
+          onClick={() => setIsCartOpen(true)}
+          className="w-12 h-12 rounded-full bg-stone-900 shadow-lg flex items-center justify-center hover:scale-110 transition-transform relative"
+        >
+          <ShoppingBag className="w-5 h-5 text-white" />
+          {cart.length > 0 && (
+            <span className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+              {cart.reduce((sum, item) => sum + item.quantity, 0)}
+            </span>
+          )}
+        </button>
+
+        {/* 回到最上方按鈕 */}
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform mt-2 text-stone-600"
+        >
+          ▲
+        </button>
+      </div>
+
       {/* Toast Notification */}
       <AnimatePresence>
         {showToast && (
