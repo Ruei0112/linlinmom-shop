@@ -592,7 +592,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
     { id: 'daily', name: '生活百貨', icon: <Package className="w-4 h-4" /> },
     { id: 'limited', name: '限時優惠', icon: <Clock className="w-4 h-4" /> },
     { id: 'pet', name: '寵物專區', icon: <Heart className="w-4 h-4" /> },
-    { id: 'welfare', name: '葵粉福利區', icon: <Sparkles className="w-4 h-4" /> },
+    { id: 'welfare', name: '林林媽粉絲福利區', icon: <Sparkles className="w-4 h-4" /> },
   ];
 
   return (
@@ -861,7 +861,7 @@ window.history.pushState(null, '', newUrl);
                         <div className="flex justify-between items-start mb-2">
                           {/* 🌟 修復 3：分類標籤顯示正確名稱 */}
                           <span className="text-[10px] font-bold text-rose-500 uppercase tracking-widest">
-                            {product.category === 'health' ? '保健食品' : product.category === 'daily' ? '生活百貨' : product.category === 'limited' ? '限時優惠' : product.category === 'pet' ? '寵物專區' : '葵粉福利區'}
+                            {product.category === 'health' ? '保健食品' : product.category === 'daily' ? '生活百貨' : product.category === 'limited' ? '限時優惠' : product.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
                           </span>
                           <button 
                             onClick={(e) => toggleFavorite(product.id, e)}
@@ -1098,7 +1098,7 @@ window.history.pushState(null, '', newUrl);
                             <option value="daily">生活百貨</option>
                             <option value="limited">限時優惠</option>
                             <option value="pet">寵物專區</option>
-                            <option value="welfare">葵粉福利區</option>
+                            <option value="welfare">林林媽粉絲福利區</option>
                           </select>
 
                           {/* 🌟 新增：商品狀態選單 */}
@@ -1135,7 +1135,7 @@ window.history.pushState(null, '', newUrl);
                             />
                             📌 釘選此商品 (排在首頁最前面)
                           </label>
-                          {/* 只有當分類是「葵粉福利區 (welfare)」時，才顯示下方選項 */}
+                          {/* 只有當分類是「林林媽粉絲福利區 (welfare)」時，才顯示下方選項 */}
                         {editForm?.category === 'welfare' && (
                           <div className="flex flex-col gap-3 p-4 bg-rose-50 rounded-2xl border border-rose-200 mt-4">
                             <label className="flex items-center gap-3 font-bold cursor-pointer text-stone-900">
@@ -1173,7 +1173,7 @@ window.history.pushState(null, '', newUrl);
                         {(!editForm?.isAnnouncement || editForm?.category !== 'welfare') && (
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <label className="block text-xs font-bold text-rose-500 uppercase tracking-widest mb-2">葵粉最低優惠價</label>
+                              <label className="block text-xs font-bold text-rose-500 uppercase tracking-widest mb-2">林林媽粉絲最低優惠價</label>
                               <input 
                                 type="number"
                                 value={editForm?.price || 0}
@@ -1414,7 +1414,7 @@ window.history.pushState(null, '', newUrl);
                           <div className="flex items-center gap-2 mb-4">
                             {/* 🌟 修復 3：詳細頁的分類標籤 */}
                             <span className="px-3 py-1 rounded-full bg-rose-200 text-rose-600 text-xs font-bold tracking-widest uppercase">
-                             {selectedProduct.category === 'health' ? '保健食品' : selectedProduct.category === 'daily' ? '生活百貨' : selectedProduct.category === 'limited' ? '限時優惠' : selectedProduct.category === 'pet' ? '寵物專區' : '葵粉福利區'}
+                             {selectedProduct.category === 'health' ? '保健食品' : selectedProduct.category === 'daily' ? '生活百貨' : selectedProduct.category === 'limited' ? '限時優惠' : selectedProduct.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
                             </span>
                             {selectedProduct.status === 'limited' && (
                               <span className="px-3 py-1 rounded-full bg-rose-600/10 text-rose-500 text-xs font-bold tracking-widest uppercase flex items-center gap-1">
@@ -1453,9 +1453,9 @@ window.history.pushState(null, '', newUrl);
                                   原價：<span className="line-through">${selectedProduct.originalPrice}</span>
                                 </div>
                               )}
-                              {/* 顯示葵粉專屬優惠區塊 */}
+                              {/* 顯示林林媽粉絲專屬優惠區塊 */}
   <div className="text-4xl font-bold text-rose-600 flex items-baseline gap-2">
-    <span className="text-2xl text-stone-700 tracking-wider">葵粉最低優惠價：</span>
+    <span className="text-2xl text-stone-700 tracking-wider">林林媽粉絲最低優惠價：</span>
     ${selectedProduct.price}
   </div>
                             </div>
@@ -1862,8 +1862,8 @@ window.history.pushState(null, '', newUrl);
             <a href="https://lin.ee/3FkHbsvk" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-stone-700/60 hover:text-rose-500 transition-colors">
               <span className="font-bold">LINE: @linlinmom2828</span>
             </a>
-            <a href="https://www.facebook.com/people/%25E8%2591%25B5%25E8%2591%25B5%25E5%25AA%25BD%25E5%2592%25AA/61585810028195/?locale=zh_TW&checkpoint_src=any" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Facebook</a>
-            <a href="https://www.instagram.com/kewi.mommy/" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/kellyluo66" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Facebook</a>
+            <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Instagram</a>
           </div>
           <p className="text-[10px] text-stone-700/30 uppercase tracking-[0.2em]">
             © 2024 AOI GROUP BUY. ALL RIGHTS RESERVED.
