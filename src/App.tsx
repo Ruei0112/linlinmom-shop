@@ -600,14 +600,24 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
       {/* Header */}
       <header className="sticky top-0 z-40 bg-orange-50/80 backdrop-blur-md border-b border-rose-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          {/* 🌟 修改：讓 Logo 和標題變成可以點擊的「回首頁」按鈕 */}
+          <button 
+            onClick={() => {
+              setSelectedProduct(null); // 關閉商品詳細頁
+              setSearchQuery('');       // 清空搜尋關鍵字
+              setActiveCategory('all'); // 把分類切回「全部商品」
+              window.history.pushState(null, '', window.location.pathname); // 把網址後面的小尾巴擦乾淨
+              window.scrollTo({ top: 0, behavior: 'smooth' }); // 平滑滾動到最上方
+            }}
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity text-left"
+          >
             <div className="w-10 h-10 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
               <Sparkles className="w-6 h-6 fill-current" />
             </div>
             <h1 className="text-xl font-bold text-stone-900 tracking-tight">
               林林媽開團小宇宙
             </h1>
-          </div>
+          </button>
           <div className="flex items-center gap-4">
             {isAdmin ? (
               <div className="flex items-center gap-3">
