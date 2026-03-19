@@ -348,7 +348,7 @@ export default function App() {
     });
     
     const lineId = "@234csaak";
-    let message = "🌟 葵葵開團小宇宙 - 訂單預約 🌟\n\n";
+    let message = "🌟 林林媽開團小宇宙 - 訂單預約 🌟\n\n";
     message += "您好！我想訂購以下商品：\n";
     message += "--------------------------\n";
     
@@ -450,7 +450,7 @@ export default function App() {
       })
     }).catch(err => console.error("銷量更新失敗:", err));
     
-    let message = `🌟 葵葵開團小宇宙 - 立即詢問 🌟\n\n`;
+    let message = `🌟 林林媽開團小宇宙 - 立即詢問 🌟\n\n`;
     message += `我想詢問商品：${product.name}\n`;
     
     // 🌟 自動判斷：拆分方案與明細
@@ -605,7 +605,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               <Sparkles className="w-6 h-6 fill-current" />
             </div>
             <h1 className="text-xl font-bold text-stone-900 tracking-tight">
-              葵葵開團小宇宙
+              林林媽開團小宇宙
             </h1>
           </div>
           <div className="flex items-center gap-4">
@@ -1853,7 +1853,7 @@ window.history.pushState(null, '', newUrl);
             <div className="w-8 h-8 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
               <Sparkles className="w-4 h-4 fill-current" />
             </div>
-            <span className="font-bold text-stone-900">葵葵開團小宇宙</span>
+            <span className="font-bold text-stone-900">林林媽開團小宇宙</span>
           </div>
           <p className="text-sm text-stone-700/60 mb-8 max-w-md mx-auto">
             我們致力於尋找生活中最美好的事物，讓您的每一天都充滿驚喜與健康。
