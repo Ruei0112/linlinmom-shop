@@ -347,7 +347,7 @@ export default function App() {
       }).catch(err => console.error("銷量更新失敗:", err)); // 就算失敗也不會影響顧客跳轉 LINE
     });
     
-    const lineId = "@234csaak";
+    const lineId = "@linlinmom2828";
     let message = "🌟 林林媽開團小宇宙 - 訂單預約 🌟\n\n";
     message += "您好！我想訂購以下商品：\n";
     message += "--------------------------\n";
@@ -468,7 +468,7 @@ export default function App() {
     message += `\n請幫我確認是否有現貨，謝謝！`;
     
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://line.me/R/oaMessage/@234csaak/?${encodedMessage}`, '_blank');
+    window.open(`https://line.me/R/oaMessage/@linlinmom2828/?${encodedMessage}`, '_blank');
   };
   
   const handleLogin = (e: React.FormEvent) => {
@@ -694,7 +694,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-32 space-y-4">
             <Loader2 className="w-12 h-12 text-rose-500 animate-spin" />
-            <p className="text-stone-700 font-bold text-lg animate-pulse">葵葵好物載入中...</p>
+            <p className="text-stone-700 font-bold text-lg animate-pulse">林林媽好物載入中...</p>
           </div>
         ) : (
           <AnimatePresence>
@@ -744,7 +744,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
             // 🌟 點擊後跳轉到 LINE 並帶入客製化關鍵字
             const item = carouselItems[currentSlide];
             const message = item.lineKeyword || `我想詢問商品：${item.name}`;
-            window.open(`https://line.me/R/oaMessage/@234csaak/?${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://line.me/R/oaMessage/@linlinmom2828/?${encodeURIComponent(message)}`, '_blank');
           }}
         >
           <img
@@ -784,7 +784,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                       美好生活，從這裡開始
                     </h2>
                     <p className="text-stone-700/70 max-w-lg mx-auto">
-                      葵葵為您嚴選高品質的日常所需，從健康到居家，每一件都是我們的真心推薦。
+                      林林媽為您嚴選高品質的日常所需，從健康到居家，每一件都是我們的真心推薦。
                     </p>
                   </section>
                 )}
@@ -1673,7 +1673,7 @@ window.history.pushState(null, '', newUrl);
                         </div>
                         
                         <p className="mt-6 text-center text-xs text-stone-700/40">
-                          * 點擊立即詢問將導向葵葵官方 LINE 進行訂購
+                          * 點擊立即詢問將導向林林媽官方 LINE 進行訂購
                         </p>
                       </>
                     )}
@@ -1860,7 +1860,7 @@ window.history.pushState(null, '', newUrl);
           </p>
           <div className="flex justify-center gap-6 mb-8">
             <a href="https://lin.ee/3FkHbsvk" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-stone-700/60 hover:text-rose-500 transition-colors">
-              <span className="font-bold">LINE: @234csaak</span>
+              <span className="font-bold">LINE: @linlinmom2828</span>
             </a>
             <a href="https://www.facebook.com/people/%25E8%2591%25B5%25E8%2591%25B5%25E5%25AA%25BD%25E5%2592%25AA/61585810028195/?locale=zh_TW&checkpoint_src=any" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Facebook</a>
             <a href="https://www.instagram.com/kewi.mommy/" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Instagram</a>
