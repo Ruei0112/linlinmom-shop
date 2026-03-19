@@ -800,21 +800,27 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 )}
 
                 {/* Category Tabs */}
-                <div className="flex flex-wrap gap-2 mb-8 justify-center">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveCategory(cat.id as any)}
-                      className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                        activeCategory === cat.id
-                          ? 'bg-stone-700 text-orange-50 shadow-lg shadow-stone-700/20'
-                          : 'bg-rose-200 text-stone-700 hover:bg-rose-200/70'
-                      }`}
+                {/* 🌟 修改版：可愛質感「膠囊」下拉式分類選單 */}
+                <div className="mb-8 w-full max-w-sm mx-auto px-4">
+                  <div className="relative group">
+                    <select
+                      value={activeCategory}
+                      onChange={(e) => setActiveCategory(e.target.value as any)}
+                      className="w-full p-4 pl-6 pr-12 appearance-none bg-white border-2 border-rose-200 text-stone-700 text-base font-bold focus:outline-none focus:border-rose-400 rounded-full shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-rose-300"
                     >
-                      {cat.icon}
-                      {cat.name}
-                    </button>
-                  ))}
+                      {categories.map((cat) => (
+                        <option key={cat.id} value={cat.id}>
+                          {cat.name}
+                        </option>
+                      ))}
+                    </select>
+                    {/* 圓潤版下拉箭頭 */}
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-rose-400 group-hover:text-rose-500 transition-colors">
+                      <svg className="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Product Grid */}
