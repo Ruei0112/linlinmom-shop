@@ -7,6 +7,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'; 
 import { 
   ShoppingBag, 
+  Menu,
   ChevronRight, 
   ArrowLeft, 
   Heart, 
@@ -260,6 +261,7 @@ export default function App() {
   // Cart & Favorites State
   const [cart, setCart] = useState<{ product: Product; quantity: number; variant: string }[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [favorites, setFavorites] = useState<string[]>([]);
   
   // Selection State for Detail View
@@ -598,26 +600,38 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
   return (
     <div className="min-h-screen bg-orange-50/30 font-sans selection:bg-rose-500/30 text-stone-800">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-orange-50/80 backdrop-blur-md border-b border-rose-200">
+     <header className="sticky top-0 z-40 bg-orange-50/80 backdrop-blur-md border-b border-rose-200">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          {/* 🌟 修改：讓 Logo 和標題變成可以點擊的「回首頁」按鈕 */}
-          <button 
-            onClick={() => {
-              setSelectedProduct(null); // 關閉商品詳細頁
-              setSearchQuery('');       // 清空搜尋關鍵字
-              setActiveCategory('all'); // 把分類切回「全部商品」
-              window.history.pushState(null, '', window.location.pathname); // 把網址後面的小尾巴擦乾淨
-              window.scrollTo({ top: 0, behavior: 'smooth' }); // 平滑滾動到最上方
-            }}
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity text-left"
-          >
-            <div className="w-10 h-10 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
-              <Sparkles className="w-6 h-6 fill-current" />
-            </div>
-            <h1 className="text-xl font-bold text-stone-900 tracking-tight">
-              林林媽開團小宇宙
-            </h1>
-          </button>
+          <div className="flex items-center gap-3"> {/* 👈 這裡的 gap-2 改成 gap-3 */}
+            
+            {/* 🌟 新增：左側漢堡選單按鈕 */}
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 -ml-2 rounded-full hover:bg-rose-200 transition-colors text-stone-700"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+
+            {/* 原本的 Logo 與標題按鈕 (維持你剛才改好的樣子) */}
+            <button 
+              onClick={() => {
+                setSelectedProduct(null); 
+                setSearchQuery('');       
+                setActiveCategory('all'); 
+                window.history.pushState(null, '', window.location.pathname); 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+              }}
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity text-left"
+            >
+              <div className="w-10 h-10 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
+                <Sparkles className="w-6 h-6 fill-current" />
+              </div>
+              <h1 className="text-xl font-bold text-stone-900 tracking-tight line-clamp-1">
+                林林媽開團小宇宙
+              </h1>
+            </button>
+          </div>
+          {/* ... 後面的右側按鈕區塊維持原樣 ... */}
           <div className="flex items-center gap-4">
             {isAdmin ? (
               <div className="flex items-center gap-3">
@@ -1824,6 +1838,68 @@ window.history.pushState(null, '', newUrl);
                   登入
                 </button>
               </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+{/* 🌟 新增：左側滑出分類側邊欄 */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <div className="fixed inset-0 z-50 overflow-hidden">
+            {/* 黑色半透明背景遮罩 */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsSidebarOpen(false)}
+              className="absolute inset-0 bg-stone-900/40 backdrop-blur-sm"
+            />
+            {/* 側邊欄白底面板 (加上右側可愛圓角) */}
+            <motion.div 
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="absolute top-0 left-0 h-full w-[75%] max-w-sm bg-orange-50 shadow-2xl flex flex-col rounded-r-[30px] overflow-hidden"
+            >
+              {/* 側邊欄頭部 */}
+              <div className="p-6 border-b border-rose-200 flex justify-between items-center bg-orange-50/80 backdrop-blur-md">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
+                    <Sparkles className="w-4 h-4 fill-current" />
+                  </div>
+                  <h3 className="text-lg font-bold text-stone-900">商品分類</h3>
+                </div>
+                <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-stone-700 hover:text-rose-500 bg-white rounded-full shadow-sm">
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* 分類按鈕清單 */}
+              <div className="flex-1 overflow-y-auto py-6 px-4 space-y-3">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => {
+                      setActiveCategory(cat.id as any); // 切換分類
+                      setSelectedProduct(null); // 如果在商品詳細頁，自動退回列表
+                      setIsSidebarOpen(false); // 點擊後自動收起側邊欄
+                      window.scrollTo({ top: 0, behavior: 'smooth' }); // 自動滾回最上方
+                    }}
+                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-base font-bold transition-all duration-300 ${
+                      activeCategory === cat.id
+                        ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30'
+                        : 'bg-white text-stone-700 hover:bg-rose-100 border border-transparent shadow-sm'
+                    }`}
+                  >
+                    <span className={`${activeCategory === cat.id ? 'text-white' : 'text-rose-400'}`}>
+                      {cat.icon}
+                    </span>
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
             </motion.div>
           </div>
         )}
