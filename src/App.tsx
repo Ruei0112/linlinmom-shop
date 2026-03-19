@@ -1685,19 +1685,41 @@ window.history.pushState(null, '', newUrl);
         )}
       </main>
 
-      {/* 🌟 新增：右側浮動快捷鍵 */}
+      {/* 🌟 修改版：右側浮動快捷鍵 (IG、LINE 圖示改為圓形滿版) */}
       <div className="fixed bottom-6 right-4 z-50 flex flex-col gap-3">
-        {/* IG 按鈕 */}
-        <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="IG" className="w-7 h-7" />
+        {/* IG 按鈕 - 改為滿版圓形 */}
+        <a 
+          href="https://www.instagram.com/lin_lin_mom66/" 
+          target="_blank" 
+          rel="noreferrer" 
+          className="w-12 h-12 rounded-full overflow-hidden shadow-lg border border-stone-100 hover:scale-110 transition-transform"
+          /* 💡 移除：flex, bg-white, padding. 增加：overflow-hidden. */
+        >
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" 
+            alt="IG" 
+            className="w-full h-full object-cover" 
+            /* 💡 設為滿版 (w-full, h-full) 並 object-cover 裁切完美圓形 */
+          />
         </a>
         
-        {/* LINE 按鈕 */}
-        <a href="https://lin.ee/3FkHbsvk" target="_blank" rel="noreferrer" className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform p-1">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" alt="LINE" className="w-full h-full object-contain" />
+        {/* LINE 按鈕 - 改為滿版圓形 (已修正連結) */}
+        <a 
+          href="https://line.me/R/ti/p/@linlinmom2828" // 👈 這是修正過的林林媽專屬連結
+          target="_blank" 
+          rel="noreferrer" 
+          className="w-12 h-12 rounded-full overflow-hidden shadow-lg border border-stone-100 hover:scale-110 transition-transform"
+          /* 💡 移除：flex, bg-white, padding. 增加：overflow-hidden. */
+        >
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" 
+            alt="LINE" 
+            className="w-full h-full object-cover" 
+            /* 💡 設為滿版並 object-cover，之前的 contain 會露出白色 */
+          />
         </a>
 
-        {/* 購物車按鈕 */}
+        {/* 購物車按鈕 (維持原樣) */}
         <button 
           onClick={() => setIsCartOpen(true)}
           className="w-12 h-12 rounded-full bg-stone-900 shadow-lg flex items-center justify-center hover:scale-110 transition-transform relative"
@@ -1710,7 +1732,7 @@ window.history.pushState(null, '', newUrl);
           )}
         </button>
 
-        {/* 回到最上方按鈕 */}
+        {/* 回到最上方按鈕 (維持原樣) */}
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center border border-stone-100 hover:scale-110 transition-transform mt-2 text-stone-600"
