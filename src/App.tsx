@@ -156,7 +156,7 @@ export default function App() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbwIG-ICNYJMdtvbMtUtCIk1ClVF37vkKO0nbeRKJULGn037lDqbnP2AnrzzWhvCgjZq/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycby_zqR74TyKXic-lIu3rG3nTb742B0lGoMxRwFMZ-MaD5ohvaaKcvSQQ3mC2IjUshqF/exec';
         const response = await fetch(scriptUrl);
         const data = await response.json();
         
@@ -328,7 +328,7 @@ export default function App() {
   };
 
   // 這是你熱騰騰拿到的 Google 表格專屬鑰匙
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbwIG-ICNYJMdtvbMtUtCIk1ClVF37vkKO0nbeRKJULGn037lDqbnP2AnrzzWhvCgjZq/exec";
+  const GAS_URL = "https://script.google.com/macros/s/AKfycby_zqR74TyKXic-lIu3rG3nTb742B0lGoMxRwFMZ-MaD5ohvaaKcvSQQ3mC2IjUshqF/exec";
 
   const handleCheckout = () => {
     if (cart.length === 0) return;
@@ -493,7 +493,7 @@ export default function App() {
   const handleSaveEdit = async () => {
     if (!editForm) return;
     
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwIG-ICNYJMdtvbMtUtCIk1ClVF37vkKO0nbeRKJULGn037lDqbnP2AnrzzWhvCgjZq/exec';
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycby_zqR74TyKXic-lIu3rG3nTb742B0lGoMxRwFMZ-MaD5ohvaaKcvSQQ3mC2IjUshqF/exec';
     const isNew = !editForm.id;
     const targetProduct = isNew ? { ...editForm, id: Date.now().toString() } : editForm;
 
