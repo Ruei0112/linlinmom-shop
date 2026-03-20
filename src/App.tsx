@@ -1940,8 +1940,8 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 </div>
               </div>
 
-              {/* 3. 分類按鈕清單 (中間滑動區塊) */}
-              <div className="flex-1 overflow-y-auto py-6 px-5 space-y-4 bg-[#FFFBEB]">
+              {/* 3. 分類按鈕清單 (瘦身精緻版) */}
+              <div className="flex-1 overflow-y-auto py-6 px-5 space-y-3 bg-[#FFFBEB]">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
@@ -1951,34 +1951,22 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                       setIsSidebarOpen(false);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-[3px] border-stone-900 text-lg font-black transition-all duration-200 ${
+                    // 🌟 瘦身魔法：py-3, px-4, text-base, rounded-xl 讓按鈕變小巧
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border-[3px] border-stone-900 text-base font-black transition-all duration-200 ${
                       activeCategory === cat.id
-                        ? 'bg-[#FF90E8] text-stone-900 shadow-[4px_4px_0px_0px_#1c1917] translate-y-[-2px]'
-                        : 'bg-white text-stone-900 shadow-[2px_2px_0px_0px_#1c1917] hover:bg-[#A3E635] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_#1c1917]'
+                        ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] translate-y-[-2px]'
+                        : 'bg-white text-stone-900 shadow-[2px_2px_0px_0px_#1c1917] hover:bg-[#A3E635] hover:translate-y-[-2px] hover:shadow-[3px_3px_0px_0px_#1c1917]'
                     }`}
                   >
-                    <span className="text-stone-900 bg-white border-2 border-stone-900 rounded-lg p-1 shadow-sm">
+                    <span className="text-stone-900 bg-white border-2 border-stone-900 rounded-lg p-1 shadow-sm flex items-center justify-center">
                       {cat.icon}
                     </span>
                     {cat.name}
                   </button>
                 ))}
               </div>
-
-              {/* 4. 側邊欄底部社群連結 (萊姆綠區塊) */}
-              <div className="p-6 border-t-[4px] border-stone-900 bg-[#A3E635] flex flex-col items-center gap-5 flex-shrink-0 z-10">
-                <span className="text-stone-900 font-black text-sm tracking-widest bg-white px-4 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform -rotate-2">
-                  關注日常好物 💛
-                </span>
-                <div className="flex justify-center gap-6">
-                  <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform rotate-3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="IG" className="w-full h-full object-cover" />
-                  </a>
-                  <a href="https://line.me/R/ti/p/@linlinmom2828" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform -rotate-2 p-1">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" alt="LINE" className="w-full h-full object-cover" />
-                  </a>
-                </div>
-              </div>
+              
+              {/* (綠色社群區塊已刪除，讓視覺保持乾淨) */}
 
             </motion.div>
           </div>
