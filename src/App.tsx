@@ -1910,6 +1910,34 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 </button>
               </div>
 
+{/* 🌟 側邊欄專屬：手繪風搜尋框 */}
+              <div className="p-5 border-b-[4px] border-stone-900 bg-[#FFFBEB]">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="🔍 找找看有沒有喜歡的..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      // 💡 貼心魔法：手機鍵盤按下 Enter 搜尋後，自動收起側邊欄讓粉絲看結果！
+                      if (e.key === 'Enter') {
+                        setIsSidebarOpen(false); 
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }
+                    }}
+                    className="w-full p-3 pl-4 rounded-xl border-[3px] border-stone-900 bg-white shadow-[4px_4px_0px_0px_#1c1917] focus:outline-none focus:translate-y-[2px] focus:shadow-[2px_2px_0px_0px_#1c1917] text-stone-900 font-black transition-all placeholder:text-stone-400 text-sm"
+                  />
+                  {searchQuery && (
+                    <button 
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#FF5757] text-white border-2 border-stone-900 w-7 h-7 rounded-lg flex items-center justify-center shadow-[2px_2px_0px_0px_#1c1917] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_#1c1917] active:translate-y-[2px] active:shadow-none transition-all font-black"
+                    >
+                      ✕
+                    </button>
+                  )}
+                </div>
+              </div>
+
               {/* 分類按鈕清單 */}
               <div className="flex-1 overflow-y-auto py-8 px-5 space-y-4 bg-[#FFFBEB]">
                 {categories.map((cat) => (
@@ -1934,6 +1962,31 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                   </button>
                 ))}
               </div>
+
+{/* 分類按鈕清單 */}
+              <div className="flex-1 overflow-y-auto py-8 px-5 space-y-4 bg-[#FFFBEB]">
+                {categories.map((cat) => (
+                  // ... (這裡是你原本的分類按鈕，保持不動) ...
+                ))}
+              </div>
+
+              {/* 🌟 繽紛手繪風：側邊欄底部社群連結 */}
+              <div className="p-6 border-t-[4px] border-stone-900 bg-[#A3E635] flex flex-col items-center gap-5 mt-auto z-10">
+                <span className="text-stone-900 font-black text-sm tracking-widest bg-white px-4 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform -rotate-2">
+                  關注林林媽日常 💛
+                </span>
+                <div className="flex justify-center gap-6">
+                  {/* 立體 IG 按鈕 */}
+                  <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform rotate-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="IG" className="w-full h-full object-cover" />
+                  </a>
+                  {/* 立體 LINE 按鈕 */}
+                  <a href="https://line.me/R/ti/p/@linlinmom2828" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform -rotate-2 p-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" alt="LINE" className="w-full h-full object-cover" />
+                  </a>
+                </div>
+              </div>
+
             </motion.div>
           </div>
         )}
