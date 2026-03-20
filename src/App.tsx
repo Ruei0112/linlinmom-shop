@@ -722,86 +722,85 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               >
               
       
-{/* 🌟 精緻小巧輪播區塊 */}
-<AnimatePresence>
-  {/* 🌟 升級：只有當「有輪播商品」而且「沒有在搜尋」的時候，才顯示輪播圖 */}
-  {carouselItems.length > 0 && !searchQuery && (
-    <div className="mb-8 w-full aspect-video bg-stone-900 rounded-3xl overflow-hidden relative shadow-xl shadow-rose-200/50">
-      <AnimatePresence>
-        <motion.div
-          key={currentSlide}
-          // 🪄 新增滑動魔法
-  drag="x" // 1. 開啟左右拖拽
-  dragConstraints={{ left: 0, right: 0 }} // 2. 拖完自動彈回中心
-  onDragStart={() => setIsPaused(true)} // 3. 開始滑動時暫停計時
-  
-  onDragEnd={(event, info) => {
-    setIsPaused(false); // 停止滑動後恢復計時
-    
-    // 4. 判斷滑動距離：往左滑（負數）看下一張；往右滑（正數）看上一張
-    if (info.offset.x < -50) {
-      // 下一張：目前的索引 + 1，如果到底了就回到 0
-      setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
-    } else if (info.offset.x > 50) {
-      // 上一張：目前的索引 - 1，如果是 0 就跳到最後一張
-      setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
-    }
-  }}
-          onPointerDown={() => setIsPaused(true)}  // 手指按下去時：暫停開關打開
-  onPointerUp={() => setIsPaused(false)}    // 手指拿開時：暫停開關關閉
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5 }}
-          className="absolute inset-0 cursor-pointer"
-          onClick={() => {
-            // 🌟 點擊後跳轉到 LINE 並帶入客製化關鍵字
-            const item = carouselItems[currentSlide];
-            const message = item.lineKeyword || `我想詢問商品：${item.name}`;
-            window.open(`https://line.me/R/oaMessage/@linlinmom2828/?${encodeURIComponent(message)}`, '_blank');
-          }}
-        >
-          <img
-            src={carouselItems[currentSlide].images[0]}
-            className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
-            alt="Carousel Item"
-          />
-          {/* 漸層裝飾文字 */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-stone-900/80 to-transparent">
-            <h3 className="text-white text-lg md:text-xl font-bold">
-              {carouselItems[currentSlide].name}
-            </h3>
-            <p className="text-white/60 text-sm">點擊立即私訊詢問 ✨</p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* 輪播指示點 (Dots) */}
-      <div className="absolute bottom-4 right-6 flex gap-2">
-        {carouselItems.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              idx === currentSlide ? 'bg-rose-500 w-6' : 'bg-white/30'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  )}
-</AnimatePresence>
-                
-                {/* Hero Section (搜尋時自動隱藏) */}
-                {!searchQuery && (
-                  <section className="mb-12 text-center mt-6">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4 text-stone-800">
-                      美好生活，從這裡開始
-                    </h2>
-                    <p className="text-stone-700/70 max-w-lg mx-auto">
-                      林林媽為您嚴選高品質的日常所需，從健康到居家，每一件都是我們的真心推薦。
+{/* 🌟 繽紛手繪風：歡迎招牌與動態大看板 (僅在「全部商品」且「無搜尋」時顯示) */}
+              {!searchQuery && activeCategory === 'all' && (
+                <div className="mb-12 mt-4 px-4 sm:px-0">
+                  
+                  {/* 1. 可愛歡迎語貼紙 */}
+                  <div className="text-center mb-10 flex flex-col items-center">
+                    <div className="inline-block bg-[#A3E635] border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transform -rotate-2 hover:rotate-0 transition-transform cursor-default">
+                      <h2 className="text-2xl md:text-4xl font-black text-stone-900 tracking-tight">
+                        嗨！歡迎來到林林媽的小宇宙 ✨
+                      </h2>
+                    </div>
+                    <p className="mt-5 text-stone-700 font-bold max-w-lg text-sm sm:text-base bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] px-4 py-2 rounded-xl">
+                      嚴選高質感日常所需，跟著我們一起輕鬆買對好物！
                     </p>
-                  </section>
-                )}
+                  </div>
+
+                  {/* 2. 手繪立體輪播大看板 */}
+                  <AnimatePresence>
+                    {carouselItems.length > 0 && (
+                      <div className="w-full aspect-video bg-white rounded-3xl overflow-hidden relative border-[4px] border-stone-900 shadow-[8px_8px_0px_0px_#1c1917] mb-8 group">
+                        <AnimatePresence>
+                          <motion.div
+                            key={currentSlide}
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            onDragStart={() => setIsPaused(true)}
+                            onDragEnd={(event, info) => {
+                              setIsPaused(false);
+                              if (info.offset.x < -50) {
+                                setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+                              } else if (info.offset.x > 50) {
+                                setCurrentSlide((prev) => (prev - 1 + carouselItems.length) % carouselItems.length);
+                              }
+                            }}
+                            onPointerDown={() => setIsPaused(true)}
+                            onPointerUp={() => setIsPaused(false)}
+                            initial={{ opacity: 0, x: 50 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -50 }}
+                            transition={{ duration: 0.5 }}
+                            className="absolute inset-0 cursor-pointer"
+                            onClick={() => {
+                              const item = carouselItems[currentSlide];
+                              const message = item.lineKeyword || `我想詢問商品：${item.name}`;
+                              window.open(`https://line.me/R/oaMessage/@linlinmom2828/?${encodeURIComponent(message)}`, '_blank');
+                            }}
+                          >
+                            <img
+                              src={carouselItems[currentSlide].images[0]}
+                              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                              alt="Carousel Item"
+                              referrerPolicy="no-referrer"
+                            />
+                            {/* 手繪風漸層與文字標籤 */}
+                            <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 bg-gradient-to-t from-stone-900/90 via-stone-900/40 to-transparent">
+                              <h3 className="inline-block text-white text-xl sm:text-3xl font-black bg-[#FF5757] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] px-4 py-1.5 rounded-xl transform -rotate-2 mb-2">
+                                {carouselItems[currentSlide].name}
+                              </h3>
+                              <p className="text-white font-bold text-sm sm:text-base ml-2 drop-shadow-md">點擊立即私訊詢問 🛒</p>
+                            </div>
+                          </motion.div>
+                        </AnimatePresence>
+
+                        {/* 手繪風輪播指示點 */}
+                        <div className="absolute bottom-5 right-6 flex gap-2">
+                          {carouselItems.map((_, idx) => (
+                            <div
+                              key={idx}
+                              className={`h-3 rounded-full border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transition-all duration-300 ${
+                                idx === currentSlide ? 'bg-[#FFD700] w-8' : 'bg-white w-3'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
 
                 {/* Category Tabs */}
                 {/* 🌟 修改版：可愛質感「膠囊」下拉式分類選單 */}
@@ -823,7 +822,11 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
-                    onClick={() => setActiveCategory(cat.id as any)}
+                    onClick={() => {
+                      setActiveCategory(cat.id as any);
+                      // 🌟 點擊分類後，網頁平滑滾動到最上方 (搭配輪播圖隱藏，剛好完美對齊商品)
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                     className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl border-2 border-stone-900 font-black text-sm sm:text-base flex items-center gap-2 transition-all duration-200 ${
                       activeCategory === cat.id
                         ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] translate-y-[-2px]' 
