@@ -1513,20 +1513,24 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                             {selectedProduct.name}
                           </h2>
 
-                          {/* 限時倒數 */}
+                          {/* 🌟 響應式修復：限時倒數 */}
                           {selectedProduct.category === 'limited' && selectedProduct.countdownTarget && (
-                            <div className="mb-8 bg-[#E0E7FF] border-[3px] border-stone-900 rounded-2xl px-5 py-4 inline-flex items-center gap-4 shadow-[4px_4px_0px_0px_#1c1917]">
-                              <span className="text-stone-900 text-sm font-black flex items-center gap-1.5">
+                            <div className="mb-8 bg-[#E0E7FF] border-[3px] border-stone-900 rounded-2xl p-4 sm:px-5 sm:py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 shadow-[4px_4px_0px_0px_#1c1917] w-full sm:w-auto">
+                              
+                              {/* 標題區塊：手機版在上面，電腦版在左邊 */}
+                              <span className="text-stone-900 text-sm sm:text-base font-black flex items-center gap-1.5 shrink-0">
                                 <Clock className="w-5 h-5" /> 截團倒數
                               </span>
-                              <div className="flex items-center gap-1.5 font-mono text-xl font-black text-stone-900">
-                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.days).padStart(2, '0')}</span>
-                                <span className="text-sm font-black">天</span>
-                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.hours).padStart(2, '0')}</span>
-                                <span>:</span>
-                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                                <span>:</span>
-                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                              
+                              {/* 數字區塊：調整內距與字體大小，確保手機不破版 */}
+                              <div className="flex items-center justify-between w-full sm:w-auto gap-1 sm:gap-1.5 font-mono text-base sm:text-xl font-black text-stone-900">
+                                <span className="bg-white px-2 sm:px-3 py-1 sm:py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg text-center min-w-[36px] sm:min-w-[44px]">{String(timeLeft.days).padStart(2, '0')}</span>
+                                <span className="text-xs sm:text-sm font-black mx-0.5">天</span>
+                                <span className="bg-white px-2 sm:px-3 py-1 sm:py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg text-center min-w-[36px] sm:min-w-[44px]">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                <span className="mx-0.5">:</span>
+                                <span className="bg-white px-2 sm:px-3 py-1 sm:py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg text-center min-w-[36px] sm:min-w-[44px]">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                <span className="mx-0.5">:</span>
+                                <span className="bg-white px-2 sm:px-3 py-1 sm:py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg text-center min-w-[36px] sm:min-w-[44px]">{String(timeLeft.seconds).padStart(2, '0')}</span>
                               </div>
                             </div>
                           )}
@@ -1546,12 +1550,8 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                             </div>
                           )}
 
-                          <p className="text-stone-700 font-bold leading-relaxed mb-10 text-lg whitespace-pre-wrap">
-                            {selectedProduct.description}
-                          </p>
-
-                          {/* 商品特色 */}
-                          <div className="space-y-4 mb-10">
+                          {/* 🌟 版面優化：商品特色移到最前面，第一眼先抓眼球 */}
+                          <div className="space-y-4 mb-8">
                             <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest flex items-center gap-2 bg-[#FFFBEB] inline-block px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform -rotate-2 rounded-lg">
                               <Sparkles className="w-4 h-4" /> 商品特色
                             </h4>
@@ -1566,6 +1566,11 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                               ))}
                             </ul>
                           </div>
+
+                          {/* 🌟 商品描述退居第二線，作為情境補充 */}
+                          <p className="text-stone-700 font-bold leading-relaxed mb-10 text-lg whitespace-pre-wrap pt-4 border-t border-stone-100/70">
+                            {selectedProduct.description}
+                          </p>
 
                           {/* 規格與數量選擇區 */}
                           {!selectedProduct.isAnnouncement && (
