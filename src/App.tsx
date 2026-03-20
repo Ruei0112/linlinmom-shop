@@ -936,42 +936,50 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
 
                 {/* Simple Three Steps Section */}
-                <section className="py-24 border-t border-rose-200">
+                {/* 🌟 繽紛手繪風：簡單三步驟立體積木 */}
+                <section className="py-24 border-t-4 border-stone-900 bg-[#FFFBEB] px-4 sm:px-0">
                   <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">簡單三步驟，美好送到家</h2>
-                    <div className="w-24 h-1 bg-rose-200 mx-auto rounded-full"></div>
+                    {/* 把標題變成一張傾斜的可愛貼紙 */}
+                    <h2 className="inline-block text-2xl md:text-4xl font-black text-stone-900 mb-2 bg-[#FFD700] px-6 py-3 border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] transform -rotate-2">
+                      簡單三步驟，美好送到家
+                    </h2>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                     {[
                       { 
                         step: "1. 線上選購", 
                         desc: "瀏覽目錄，選擇您心儀的商品。", 
-                        icon: MousePointer2,
-                        color: "bg-rose-100 text-rose-500"
+                        icon: MousePointer2, 
+                        color: "bg-[#FF90E8]", // 亮粉色
+                        rotate: "-rotate-3" 
                       },
                       { 
                         step: "2. 私訊下單", 
                         desc: "點擊按鈕，直接透過 Line 告知我們。", 
-                        icon: MessageCircle,
-                        color: "bg-rose-100 text-rose-500"
+                        icon: MessageCircle, 
+                        color: "bg-[#FFD700]", // 向日葵黃
+                        rotate: "rotate-3" 
                       },
                       { 
                         step: "3. 快速出貨", 
                         desc: "確認訂單後，我們將火速為您寄送。", 
-                        icon: Truck,
-                        color: "bg-rose-100 text-rose-500"
+                        icon: Truck, 
+                        color: "bg-[#A3E635]", // 萊姆綠
+                        rotate: "-rotate-3" 
                       }
                     ].map((item, idx) => (
                       <motion.div 
                         key={idx}
-                        whileHover={{ y: -10 }}
-                        className="bg-white p-10 rounded-[40px] shadow-sm hover:shadow-xl transition-all text-center border border-rose-200/20"
+                        whileHover={{ y: -5 }}
+                        className="bg-white p-8 sm:p-10 rounded-3xl border-[3px] border-stone-900 shadow-[6px_6px_0px_0px_#1c1917] hover:shadow-[8px_8px_0px_0px_#1c1917] transition-all text-center flex flex-col items-center"
                       >
-                        <div className={`w-20 h-20 rounded-full ${item.color} flex items-center justify-center mx-auto mb-8`}>
-                          <item.icon className="w-8 h-8" />
+                        {/* 立體圖示方塊 */}
+                        <div className={`w-20 h-20 rounded-2xl ${item.color} border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center mb-8 transform ${item.rotate}`}>
+                          <item.icon className="w-8 h-8 text-stone-900" />
                         </div>
-                        <h3 className="text-xl font-bold text-stone-900 mb-4">{item.step}</h3>
-                        <p className="text-stone-700/60 leading-relaxed">{item.desc}</p>
+                        <h3 className="text-2xl font-black text-stone-900 mb-4">{item.step}</h3>
+                        <p className="text-stone-700 font-bold leading-relaxed">{item.desc}</p>
                       </motion.div>
                     ))}
                   </div>
