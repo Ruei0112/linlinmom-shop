@@ -1441,90 +1441,87 @@ window.history.pushState(null, '', newUrl);
                     ) : (
                       <>
                         <div className="mb-8">
-                          <div className="flex items-center gap-2 mb-4">
-                            {/* 🌟 修復 3：詳細頁的分類標籤 */}
-                            <span className="px-3 py-1 rounded-full bg-rose-200 text-rose-600 text-xs font-bold tracking-widest uppercase">
-                             {selectedProduct.category === 'health' ? '保健食品' : selectedProduct.category === 'daily' ? '生活百貨' : selectedProduct.category === 'limited' ? '限時優惠' : selectedProduct.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
+                          <div className="flex items-center gap-2 mb-6">
+                            {/* 🌟 質感膠囊分類標籤 */}
+                            <span className="px-4 py-1.5 rounded-full bg-rose-100 text-rose-600 text-xs font-bold tracking-widest uppercase shadow-sm">
+                              {selectedProduct.category === 'health' ? '保健食品' : selectedProduct.category === 'daily' ? '生活百貨' : selectedProduct.category === 'limited' ? '限時優惠' : selectedProduct.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
                             </span>
                             {selectedProduct.status === 'limited' && (
-                              <span className="px-3 py-1 rounded-full bg-rose-600/10 text-rose-500 text-xs font-bold tracking-widest uppercase flex items-center gap-1">
+                              <span className="px-4 py-1.5 rounded-full bg-rose-500 text-white text-xs font-bold tracking-widest uppercase flex items-center gap-1 shadow-md shadow-rose-500/30">
                                 <Clock className="w-3 h-3" /> 限時優惠
                               </span>
                             )}
                           </div>
-                          <h2 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4 leading-tight">
+                          
+                          <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-4 leading-tight">
                             {selectedProduct.name}
                           </h2>
-                          {/* 🌟 專屬詳細頁的限時倒數計時器 */}
-{selectedProduct.category === 'limited' && selectedProduct.countdownTarget && (
-  <div className="mb-6 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 inline-flex items-center gap-3 shadow-sm">
-    <span className="text-rose-600 text-sm font-bold flex items-center gap-1">
-      <Clock className="w-4 h-4" /> 截團倒數
-    </span>
-    <div className="flex items-center gap-1 font-mono text-lg font-bold text-rose-500">
-      {/* 🌟 這是新增的天數區塊 */}
-      <span className="bg-white px-2 py-0.5 rounded shadow-sm">{String(timeLeft.days).padStart(2, '0')}</span>
-      <span className="text-sm font-sans mr-1 pt-0.5 text-rose-600">天</span>
-      
-      {/* 下面是時、分、秒 */}
-      <span className="bg-white px-2 py-0.5 rounded shadow-sm">{String(timeLeft.hours).padStart(2, '0')}</span>
-      <span className="animate-pulse">:</span>
-      <span className="bg-white px-2 py-0.5 rounded shadow-sm">{String(timeLeft.minutes).padStart(2, '0')}</span>
-      <span className="animate-pulse">:</span>
-      <span className="bg-white px-2 py-0.5 rounded shadow-sm">{String(timeLeft.seconds).padStart(2, '0')}</span>
-    </div>
-  </div>
-)}
+
+                          {/* 🌟 專屬詳細頁的限時倒數計時器 (圓潤版) */}
+                          {selectedProduct.category === 'limited' && selectedProduct.countdownTarget && (
+                            <div className="mb-8 bg-rose-50/80 border-2 border-rose-200 rounded-2xl px-5 py-4 inline-flex items-center gap-4 shadow-sm">
+                              <span className="text-rose-600 text-sm font-bold flex items-center gap-1.5">
+                                <Clock className="w-5 h-5" /> 截團倒數
+                              </span>
+                              <div className="flex items-center gap-1.5 font-mono text-xl font-bold text-rose-500">
+                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.days).padStart(2, '0')}</span>
+                                <span className="text-sm font-sans mr-2 pt-1 text-rose-600 font-bold">天</span>
+                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                <span className="animate-pulse text-rose-400">:</span>
+                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                <span className="animate-pulse text-rose-400">:</span>
+                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                              </div>
+                            </div>
+                          )}
+
                           {!selectedProduct.isAnnouncement && (
-                            <div className="flex flex-col gap-1 mb-6">
-                              {/* 顯示原價區塊 (如果有設定原價的話) */}
+                            <div className="flex flex-col gap-1 mb-8 p-6 bg-stone-50 rounded-3xl border border-stone-100">
                               {selectedProduct.originalPrice && (
-                                <div className="text-lg text-stone-600 font-medium tracking-wider">
+                                <div className="text-lg text-stone-400 font-medium tracking-wider mb-1">
                                   原價：<span className="line-through">${selectedProduct.originalPrice}</span>
                                 </div>
                               )}
-                              {/* 顯示林林媽粉絲專屬優惠區塊 */}
-  <div className="text-4xl font-bold text-rose-600 flex items-baseline gap-2">
-    <span className="text-2xl text-stone-700 tracking-wider">林林媽粉絲最低優惠價：</span>
-    ${selectedProduct.price}
-  </div>
+                              <div className="text-4xl font-extrabold text-rose-500 flex items-baseline gap-2">
+                                <span className="text-xl text-stone-700 font-bold tracking-wider">粉絲專屬優惠：</span>
+                                ${selectedProduct.price}
+                              </div>
                             </div>
                           )}
-                          {/* 🌟 修復 2：商品描述加入 whitespace-pre-wrap 來支援換行 */}
-                          <p className="text-stone-700/70 leading-relaxed mb-8 text-lg whitespace-pre-wrap">
+
+                          <p className="text-stone-600 leading-relaxed mb-10 text-lg whitespace-pre-wrap">
                             {selectedProduct.description}
                           </p>
 
-                          <div className="space-y-4 mb-8">
-                            <h4 className="text-sm font-bold text-stone-900 uppercase tracking-widest">
-                              商品特色
+                          {/* 商品特色區塊 */}
+                          <div className="space-y-4 mb-10">
+                            <h4 className="text-sm font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+                              <Sparkles className="w-4 h-4" /> 商品特色
                             </h4>
-                            <ul className="grid grid-cols-1 gap-3">
+                            <ul className="grid grid-cols-1 gap-4">
                               {selectedProduct.features.map((feature, i) => (
-                                <li key={i} className="flex items-center gap-3 text-stone-700/80">
-                                  <div className="w-5 h-5 rounded-full bg-rose-200 flex items-center justify-center">
-                                    <ShieldCheck className="w-3 h-3 text-rose-500" />
+                                <li key={i} className="flex items-start gap-3 text-stone-700 font-medium">
+                                  <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <ShieldCheck className="w-3.5 h-3.5 text-rose-500" />
                                   </div>
-                                  {feature}
+                                  <span className="leading-relaxed">{feature}</span>
                                 </li>
                               ))}
                             </ul>
                           </div>
 
-                          {/* Variant & Quantity Selection */}
+                          {/* 🌟 膠囊化規格與精緻數量選擇區 */}
                           {!selectedProduct.isAnnouncement && (
-                           <div className="space-y-6 mb-8 p-6 bg-rose-50/50 rounded-3xl border border-rose-200/20">
-                              {/* 🌟 升級版：支援「組合包下拉選單」、「單一」與「多維度」自動切換的規格區 */}
+                            <div className="space-y-8 mb-10 p-8 bg-white rounded-[32px] border-2 border-rose-100 shadow-sm">
                               {selectedProduct.isComboMode ? (
-                                <div className="space-y-5">
-                                  {/* 🌟 第一步：選擇購買方案 */}
+                                <div className="space-y-6">
                                   {selectedProduct.variants && selectedProduct.variants.length > 0 && (
                                     <div>
-                                      <label className="block text-sm font-bold text-stone-900 mb-2">🛒 選擇方案</label>
+                                      <label className="block text-base font-bold text-stone-800 mb-3">🛒 選擇購買方案</label>
                                       <select
                                         value={selectedVariant}
                                         onChange={(e) => setSelectedVariant(e.target.value)}
-                                        className="w-full p-3 rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 bg-white cursor-pointer font-bold text-stone-700"
+                                        className="w-full p-4 rounded-full border-2 border-rose-200 focus:outline-none focus:border-rose-400 bg-rose-50/30 cursor-pointer font-bold text-stone-700 transition-colors"
                                       >
                                         <option value="">-- 請先選擇購買方案 --</option>
                                         {selectedProduct.variants.map(v => (
@@ -1534,15 +1531,12 @@ window.history.pushState(null, '', newUrl);
                                     </div>
                                   )}
 
-                                  {/* 🌟 第二步：利用 && 判斷式，只有當 selectedVariant 有值時，才顯示下方的分配區 */}
                                   {selectedVariant && (
-                                    <div className="space-y-3 pt-4 border-t-2 border-dashed border-rose-200">
-                                      <label className="block text-sm font-bold text-stone-900 mb-2">📦 組合包規格分配</label>
+                                    <div className="space-y-4 pt-6 border-t-2 border-dashed border-rose-100">
+                                      <label className="block text-base font-bold text-stone-800 mb-2">📦 組合包明細分配</label>
                                       {comboSelections.map((selection, index) => (
-                                        <div key={selection.id} className="flex flex-wrap items-center gap-2 p-3 bg-white rounded-xl border border-rose-200 shadow-sm">
-                                          <span className="text-xs font-bold text-stone-400 bg-stone-100 px-2 py-1 rounded-md">#{index + 1}</span>
-                                          
-                                          {/* 動態產生每個規格的下拉選單 (例如顏色、尺寸) */}
+                                        <div key={selection.id} className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-3xl border-2 border-stone-100 shadow-sm">
+                                          <span className="w-8 h-8 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 font-bold text-sm">#{index + 1}</span>
                                           {selectedProduct.variantGroups?.map(group => (
                                             <select
                                               key={group.name}
@@ -1552,7 +1546,7 @@ window.history.pushState(null, '', newUrl);
                                                 newSelections[index].variants[group.name] = e.target.value;
                                                 setComboSelections(newSelections);
                                               }}
-                                              className="flex-1 min-w-[100px] p-2 text-sm border border-stone-200 rounded-lg focus:outline-none focus:border-rose-500 bg-stone-50 cursor-pointer"
+                                              className="flex-1 min-w-[110px] p-3 text-sm font-bold border-2 border-rose-100 rounded-full focus:outline-none focus:border-rose-400 bg-white cursor-pointer"
                                             >
                                               <option value="">選擇{group.name}</option>
                                               {group.options.map(opt => (
@@ -1560,10 +1554,8 @@ window.history.pushState(null, '', newUrl);
                                               ))}
                                             </select>
                                           ))}
-
-                                          {/* 這一行的數量設定與刪除按鈕 */}
-                                          <div className="flex items-center gap-2 ml-auto">
-                                            <span className="text-xs text-stone-500 font-bold">數量</span>
+                                          <div className="flex items-center gap-2 ml-auto bg-stone-50 rounded-full p-1 border border-stone-200">
+                                            <span className="text-xs text-stone-500 font-bold ml-2">數量</span>
                                             <input
                                               type="number"
                                               min="1"
@@ -1573,45 +1565,36 @@ window.history.pushState(null, '', newUrl);
                                                 newSelections[index].quantity = Math.max(1, parseInt(e.target.value) || 1);
                                                 setComboSelections(newSelections);
                                               }}
-                                              className="w-16 p-1.5 text-center text-sm border border-stone-200 rounded-lg focus:outline-none focus:border-rose-500"
+                                              className="w-12 p-1.5 text-center font-bold text-sm bg-transparent focus:outline-none"
                                             />
-                                            {comboSelections.length > 1 && (
-                                              <button
-                                                onClick={() => setComboSelections(comboSelections.filter((_, i) => i !== index))}
-                                                className="text-stone-400 hover:text-red-500 p-1 font-bold"
-                                                title="移除此行"
-                                              >
-                                                ✕
-                                              </button>
-                                            )}
                                           </div>
+                                          {comboSelections.length > 1 && (
+                                            <button onClick={() => setComboSelections(comboSelections.filter((_, i) => i !== index))} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-colors">
+                                              ✕
+                                            </button>
+                                          )}
                                         </div>
                                       ))}
-                                      
-                                      {/* 新增一行的按鈕 */}
-                                      <button
-                                        onClick={() => setComboSelections([...comboSelections, { id: Date.now(), variants: {}, quantity: 1 }])}
-                                        className="w-full py-3 border-2 border-dashed border-rose-300 text-rose-500 font-bold rounded-xl hover:bg-rose-50 transition-colors flex items-center justify-center gap-2 mt-2"
-                                      >
-                                        + 新增一組規格
+                                      <button onClick={() => setComboSelections([...comboSelections, { id: Date.now(), variants: {}, quantity: 1 }])} className="w-full py-4 border-2 border-dashed border-rose-300 text-rose-500 font-bold rounded-full hover:bg-rose-50 transition-colors flex items-center justify-center gap-2 mt-4">
+                                        <Plus className="w-5 h-5" /> 新增一組明細
                                       </button>
                                     </div>
                                   )}
                                 </div>
                               ) : (selectedProduct.variantGroups && selectedProduct.variantGroups.length > 0) ? (
-                                <div className="space-y-4">
+                                <div className="space-y-6">
                                   {selectedProduct.variantGroups.map((group, gIdx) => (
                                     <div key={gIdx}>
-                                      <label className="block text-sm font-bold text-stone-900 mb-2">{group.name}</label>
-                                      <div className="flex flex-wrap gap-2">
+                                      <label className="block text-base font-bold text-stone-800 mb-3">{group.name}</label>
+                                      <div className="flex flex-wrap gap-3">
                                         {group.options.map((opt) => (
                                           <button
                                             key={opt}
                                             onClick={() => setSelectedVariants(prev => ({ ...prev, [group.name]: prev[group.name] === opt ? '' : opt }))}
-                                            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                                            className={`px-6 py-3 rounded-full text-base font-bold transition-all duration-300 border-2 ${
                                               selectedVariants[group.name] === opt
-                                                ? 'bg-stone-700 text-orange-50 shadow-md'
-                                                : 'bg-white text-stone-700 border border-rose-200 hover:border-rose-500'
+                                                ? 'bg-rose-500 border-rose-500 text-white shadow-lg shadow-rose-500/30'
+                                                : 'bg-white border-rose-200 text-stone-600 hover:border-rose-400 hover:bg-rose-50'
                                             }`}
                                           >
                                             {opt}
@@ -1623,11 +1606,11 @@ window.history.pushState(null, '', newUrl);
                                 </div>
                               ) : selectedProduct.variants.length > 0 ? (
                                 <div>
-                                  <label className="block text-sm font-bold text-stone-900 mb-2">🛒 選擇方案</label>
+                                  <label className="block text-base font-bold text-stone-800 mb-3">🛒 選擇購買方案</label>
                                   <select
                                     value={selectedVariant}
                                     onChange={(e) => setSelectedVariant(e.target.value)}
-                                    className="w-full p-3 rounded-xl border-2 border-rose-200 focus:outline-none focus:border-rose-500 bg-white cursor-pointer font-bold text-stone-700"
+                                    className="w-full p-4 rounded-full border-2 border-rose-200 focus:outline-none focus:border-rose-400 bg-rose-50/30 cursor-pointer font-bold text-stone-700"
                                   >
                                     <option value="">-- 請選擇購買方案 --</option>
                                     {selectedProduct.variants.map(variant => (
@@ -1637,23 +1620,24 @@ window.history.pushState(null, '', newUrl);
                                 </div>
                               ) : null}
 
-                              <div className="flex items-center justify-between">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t-2 border-stone-100">
                                 <div>
-                                  <label className="block text-sm font-bold text-stone-900 mb-1">購買數量</label>
+                                  <label className="block text-base font-bold text-stone-800 mb-1">購買數量</label>
                                   {selectedProduct.maxLimit && (
-                                    <span className="text-[10px] text-rose-500 font-bold uppercase tracking-wider">
+                                    <span className="text-xs text-rose-500 font-bold uppercase tracking-wider bg-rose-100 px-2 py-1 rounded-md">
                                       每人限購 {selectedProduct.maxLimit} 件
                                     </span>
                                   )}
                                 </div>
-                                <div className="flex items-center gap-4 bg-white rounded-xl border border-rose-200 p-1">
+                                {/* 🌟 精緻版加減數量按鈕 */}
+                                <div className="flex items-center gap-4 bg-stone-50 rounded-full border-2 border-stone-100 p-1.5 w-fit shadow-inner">
                                   <button 
                                     onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
-                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-stone-700 hover:bg-rose-200 transition-colors"
+                                    className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-stone-500 hover:bg-rose-100 hover:text-rose-500 transition-colors border border-stone-200"
                                   >
-                                    <X className="w-3 h-3 rotate-45" />
+                                    <X className="w-4 h-4 rotate-45" />
                                   </button>
-                                  <span className="w-8 text-center font-bold text-stone-700">{selectedQuantity}</span>
+                                  <span className="w-10 text-center font-extrabold text-stone-800 text-lg">{selectedQuantity}</span>
                                   <button 
                                     onClick={() => {
                                       if (selectedProduct.maxLimit && selectedQuantity >= selectedProduct.maxLimit) {
@@ -1662,9 +1646,9 @@ window.history.pushState(null, '', newUrl);
                                       }
                                       setSelectedQuantity(selectedQuantity + 1);
                                     }}
-                                    className="w-8 h-8 rounded-lg flex items-center justify-center text-stone-700 hover:bg-rose-200 transition-colors"
+                                    className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-stone-500 hover:bg-rose-100 hover:text-rose-500 transition-colors border border-stone-200"
                                   >
-                                    <Plus className="w-3 h-3" />
+                                    <Plus className="w-4 h-4" />
                                   </button>
                                 </div>
                               </div>
@@ -1672,38 +1656,41 @@ window.history.pushState(null, '', newUrl);
                           )}
                         </div>
 
+                        {/* 🌟 大氣化結帳按鈕群組 */}
                         <div className="mt-auto space-y-4">
-                          <div className="flex flex-col sm:flex-row gap-4">
+                          <div className="flex flex-col gap-4">
                             <button 
                               onClick={() => handleOrderNow(selectedProduct)}
-                              className="flex-1 bg-stone-700 text-orange-50 py-4 rounded-2xl font-bold text-lg hover:bg-stone-900 transition-all duration-300 shadow-xl shadow-stone-700/20 flex items-center justify-center gap-2"
+                              className="w-full bg-stone-800 text-white py-5 rounded-full font-bold text-xl hover:bg-stone-900 transition-all duration-300 shadow-xl shadow-stone-800/20 flex items-center justify-center gap-3"
                             >
-                              立即詢問 <ExternalLink className="w-5 h-5" />
+                              立即詢問 <ExternalLink className="w-6 h-6" />
                             </button>
                             {!selectedProduct.isAnnouncement && (
                               <button 
                                 onClick={() => handleAddToCart(selectedProduct)}
-                                className="flex-1 bg-rose-200 text-stone-700 py-4 rounded-2xl font-bold text-lg hover:bg-rose-200/70 transition-all duration-300 flex items-center justify-center gap-2"
+                                className="w-full bg-rose-200 text-stone-800 py-5 rounded-full font-bold text-xl hover:bg-rose-300 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-rose-200/40"
                               >
-                                加入購物籃 <ShoppingBag className="w-5 h-5" />
+                                加入購物籃 <ShoppingBag className="w-6 h-6" />
                               </button>
                             )}
                           </div>
+                          
+                          {/* 收藏按鈕 */}
                           <button 
                             onClick={() => toggleFavorite(selectedProduct.id)}
-                            className={`w-full py-4 rounded-2xl border-2 font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                            className={`w-full py-4 rounded-full border-2 font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
                               favorites.includes(selectedProduct.id) 
-                                ? 'bg-rose-500 border-rose-500 text-white' 
-                                : 'border-rose-200 text-stone-700 hover:bg-rose-200'
+                                ? 'bg-rose-500 border-rose-500 text-white shadow-md shadow-rose-500/30' 
+                                : 'border-stone-200 text-stone-500 hover:bg-stone-50 hover:border-stone-300'
                             }`}
                           >
                             <Heart className={`w-5 h-5 ${favorites.includes(selectedProduct.id) ? 'fill-current' : ''}`} />
-                            {favorites.includes(selectedProduct.id) ? '已收藏' : '加入收藏'}
+                            {favorites.includes(selectedProduct.id) ? '已收藏此商品' : '加入收藏清單'}
                           </button>
                         </div>
                         
-                        <p className="mt-6 text-center text-xs text-stone-700/40">
-                          * 點擊立即詢問將導向林林媽官方 LINE 進行訂購
+                        <p className="mt-8 text-center text-sm font-bold text-stone-400">
+                          * 點擊「立即詢問」將由系統為您發送訊息至 林林媽官方 LINE
                         </p>
                       </>
                     )}
