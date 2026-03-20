@@ -22,6 +22,7 @@ import {
   Save,
   X,
   Plus,
+  Minus,
   Zap,
   MousePointer2,
   MessageCircle,
@@ -1629,28 +1630,33 @@ window.history.pushState(null, '', newUrl);
                                     </span>
                                   )}
                                 </div>
-                                {/* 🌟 精緻版加減數量按鈕 */}
-                                <div className="flex items-center gap-4 bg-stone-50 rounded-full border-2 border-stone-100 p-1.5 w-fit shadow-inner">
-                                  <button 
-                                    onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
-                                    className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-stone-500 hover:bg-rose-100 hover:text-rose-500 transition-colors border border-stone-200"
-                                  >
-                                    <X className="w-4 h-4 rotate-45" />
-                                  </button>
-                                  <span className="w-10 text-center font-extrabold text-stone-800 text-lg">{selectedQuantity}</span>
-                                  <button 
-                                    onClick={() => {
-                                      if (selectedProduct.maxLimit && selectedQuantity >= selectedProduct.maxLimit) {
-                                        alert(`已達限購數量 ${selectedProduct.maxLimit} 件`);
-                                        return;
-                                      }
-                                      setSelectedQuantity(selectedQuantity + 1);
-                                    }}
-                                    className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-stone-500 hover:bg-rose-100 hover:text-rose-500 transition-colors border border-stone-200"
-                                  >
-                                    <Plus className="w-4 h-4" />
-                                  </button>
-                                </div>
+                                {/* 🌟 可愛質感：實心玫瑰粉膠囊數量選擇器 (一個 + 一個 -) */}
+          <div className="flex items-center gap-4 bg-stone-50 rounded-full border-2 border-stone-100 p-1.5 w-fit shadow-inner">
+            {/* 減號按鈕 (左)：實心玫瑰粉圓 */}
+            <button 
+              onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
+              className="w-10 h-10 rounded-full bg-rose-500 shadow-sm flex items-center justify-center text-white hover:bg-rose-600 transition-colors border border-rose-600"
+            >
+              <Minus className="w-5 h-5" />
+            </button>
+
+            {/* 中間數字 */}
+            <span className="w-10 text-center font-extrabold text-stone-800 text-lg">{selectedQuantity}</span>
+
+            {/* 加號按鈕 (右)：實心玫瑰粉圓 */}
+            <button 
+              onClick={() => {
+                if (selectedProduct.maxLimit && selectedQuantity >= selectedProduct.maxLimit) {
+                  alert(`已達限購數量 ${selectedProduct.maxLimit} 件`);
+                  return;
+                }
+                setSelectedQuantity(selectedQuantity + 1);
+              }}
+              className="w-10 h-10 rounded-full bg-rose-500 shadow-sm flex items-center justify-center text-white hover:bg-rose-600 transition-colors border border-rose-600"
+            >
+              <Plus className="w-5 h-5" />
+            </button>
+          </div>
                               </div>
                             </div>
                           )}
