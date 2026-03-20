@@ -198,6 +198,7 @@ export default function App() {
   const [activeImageIdx, setActiveImageIdx] = useState(0);
   const [activeCategory, setActiveCategory] = useState<'all' | 'health' | 'daily' | 'limited' | 'welfare' | 'pet'>('all');
   // 🌟 新增：用來記住搜尋關鍵字的記憶體
+  const [sortBy, setSortBy] = useState('default'); // 🌟 新增：商品排序記憶體
   const [searchQuery, setSearchQuery] = useState('');
   
   // Countdown State
@@ -581,13 +582,26 @@ export default function App() {
     // 🌟 過期與下架隱身魔法：管理員全保留，客人只保留「未過期」且「非下架 (hidden)」的商品
 result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.status !== 'hidden'));
     
-    // 2. 🌟 釘選魔法：把有打勾 isPinned 的商品往前排！
-    return result.sort((a, b) => {
+    // 2. 🌟 釘選與自訂排序魔法
+    let sortedResult = result.sort((a, b) => {
+      // 永遠讓釘選的商品排最前面
       if (a.isPinned && !b.isPinned) return -1; 
       if (!a.isPinned && b.isPinned) return 1;  
       return 0; 
     });
-  }, [activeCategory, products, searchQuery, isAdmin]); // 🌟 記得這裡要在中括號裡加上 searchQuery，大腦才會在打字時立刻反應！
+
+    // 依照粉絲選擇的排序方式洗牌
+    if (sortBy === 'price_asc') {
+      sortedResult.sort((a, b) => (a.isPinned === b.isPinned) ? a.price - b.price : 0);
+    } else if (sortBy === 'price_desc') {
+      sortedResult.sort((a, b) => (a.isPinned === b.isPinned) ? b.price - a.price : 0);
+    } else if (sortBy === 'newest') {
+      // 因為我們的新商品 ID 都是用時間戳記 Date.now() 產生的，數字越大代表越新
+      sortedResult.sort((a, b) => (a.isPinned === b.isPinned) ? Number(b.id) - Number(a.id) : 0);
+    }
+
+    return sortedResult;
+  }, [activeCategory, products, searchQuery, isAdmin, sortBy]); // 🌟 記得最後面加上 sortBy！
 
   const categories = [
     { id: 'all', name: '全部商品', icon: <ShoppingBag className="w-4 h-4" /> },
@@ -802,6 +816,30 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
             </div>
           </div>
         )}
+
+{/* 🌟 繽紛手繪風：商品排序下拉選單 */}
+                {!selectedProduct && !isLoading && (
+                  <div className="flex justify-end mb-6 px-4 sm:px-0">
+                    <div className="relative">
+                      <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="appearance-none bg-[#E0E7FF] border-2 border-stone-900 text-stone-900 font-bold py-2.5 pl-4 pr-10 rounded-xl shadow-[3px_3px_0px_0px_#1c1917] focus:outline-none focus:translate-y-[1px] focus:shadow-[2px_2px_0px_0px_#1c1917] cursor-pointer transition-all text-sm sm:text-base"
+                      >
+                        <option value="default">✨ 預設排序</option>
+                        <option value="newest">🆕 最新上架</option>
+                        <option value="price_asc">💰 價格：低到高</option>
+                        <option value="price_desc">💎 價格：高到低</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-stone-900">
+                        {/* 手繪感小箭頭 */}
+                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Product Grid */}
                 <div id="product-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-24">
