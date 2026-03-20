@@ -726,17 +726,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               {!searchQuery && activeCategory === 'all' && (
                 <div className="mb-12 mt-4 px-4 sm:px-0">
                   
-                  {/* 1. 可愛歡迎語貼紙 */}
-                  <div className="text-center mb-10 flex flex-col items-center">
-                    <div className="inline-block bg-[#A3E635] border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] px-6 sm:px-10 py-3 sm:py-4 rounded-2xl transform -rotate-2 hover:rotate-0 transition-transform cursor-default">
-                      <h2 className="text-2xl md:text-4xl font-black text-stone-900 tracking-tight">
-                        嗨！歡迎來到林林媽的小宇宙 ✨
-                      </h2>
-                    </div>
-                    <p className="mt-5 text-stone-700 font-bold max-w-lg text-sm sm:text-base bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] px-4 py-2 rounded-xl">
-                      嚴選高質感日常所需，跟著我們一起輕鬆買對好物！
-                    </p>
-                  </div>
+                  
 
                   {/* 2. 手繪立體輪播大看板 */}
                   <AnimatePresence>
