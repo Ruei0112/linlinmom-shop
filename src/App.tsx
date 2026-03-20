@@ -614,10 +614,9 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
 
   return (
-    <div className="min-h-screen bg-orange-50/30 font-sans selection:bg-rose-500/30 text-stone-800">
-      {/* Header */}
-     {/* 🌟 繽紛手繪風：頂部招牌 */}
-      <header className="sticky top-0 z-40 bg-[#FFFBEB] border-b-4 border-stone-900">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans selection:bg-[#FF90E8]/30 text-stone-900">
+      {/* 🌟 質感升級：輕量化頂部招牌 (毛玻璃透視效果) */}
+      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-lg border-b border-stone-200">
         <div className="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between">
           
           {/* 左側群組：漢堡選單 + Logo 區塊 */}
@@ -822,33 +821,30 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
                 {/* Category Tabs */}
                 {/* 🌟 修改版：可愛質感「膠囊」下拉式分類選單 */}
-                {/* 🌟 繽紛手繪風：吸頂橫向滑動分類標籤 (直覺優化版) */}
+                {/* 🌟 質感升級：吸頂橫向滑動分類標籤 (去背留白版) */}
         {!selectedProduct && !isLoading && (
-          <div className="sticky top-20 z-30 bg-[#FFFBEB] pt-3 pb-4 border-b-[3px] border-stone-900 mb-8 -mx-4 sm:mx-0">
+          <div className="sticky top-[73px] z-30 bg-[#FAFAFA]/95 backdrop-blur-sm pt-4 pb-4 mb-4 -mx-4 sm:mx-0">
             
-            {/* 💡 魔法一：手繪感滑動提示小貼紙 */}
-            <div className="px-4 sm:px-0 mb-2 flex items-center justify-end">
-              <span className="text-[10px] sm:text-xs font-black text-stone-600 bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] px-2.5 py-1 rounded-lg flex items-center gap-1 transform rotate-2">
+            <div className="px-4 sm:px-0 mb-3 flex items-center justify-end">
+              <span className="text-[10px] sm:text-xs font-bold text-stone-400 flex items-center gap-1">
                 左右滑動看更多 <ChevronRight className="w-3 h-3" />
               </span>
             </div>
 
-            {/* 外層包覆 relative，用來放置漸層遮罩 */}
             <div className="relative">
-              {/* 加上 pr-12 (右側內距)，確保最後一個按鈕滑到底時不會貼死螢幕邊緣 */}
               <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x px-4 pr-12 sm:px-0 sm:pr-0">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => {
                       setActiveCategory(cat.id as any);
-                      // 🌟 點擊分類後，網頁平滑滾動到最上方 (搭配輪播圖隱藏，剛好完美對齊商品)
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl border-2 border-stone-900 font-black text-sm sm:text-base flex items-center gap-2 transition-all duration-200 ${
+                    // 🌟 減法魔法：沒選中時沒有粗黑框，選中時才跳出積木立體感
+                    className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl font-bold text-sm sm:text-base flex items-center gap-2 transition-all duration-200 border-2 ${
                       activeCategory === cat.id
-                        ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] translate-y-[-2px]' 
-                        : 'bg-white text-stone-900 hover:bg-[#FFD700] shadow-[1px_1px_0px_0px_#1c1917] hover:shadow-[3px_3px_0px_0px_#1c1917] hover:translate-y-[-2px]' 
+                        ? 'border-stone-900 bg-[#FFD700] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] translate-y-[-2px]' 
+                        : 'border-transparent bg-white text-stone-500 hover:bg-stone-100' 
                     }`}
                   >
                     <span className={activeCategory === cat.id ? 'text-stone-900' : 'text-stone-400'}>
@@ -858,9 +854,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                   </button>
                 ))}
               </div>
-              
-              {/* 💡 魔法二：右側漸層遮罩 (營造出後面還有東西的視覺暗示，僅限手機版顯示) */}
-              <div className="absolute top-0 right-0 bottom-2 w-10 bg-gradient-to-l from-[#FFFBEB] to-transparent pointer-events-none sm:hidden"></div>
+              <div className="absolute top-0 right-0 bottom-2 w-12 bg-gradient-to-l from-[#FAFAFA] to-transparent pointer-events-none sm:hidden"></div>
             </div>
           </div>
         )}
@@ -890,7 +884,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 )}
 
                 {/* Product Grid */}
-                {/* 🌟 繽紛手繪風：立體積木商品卡片 Grid */}
+                {/* 🌟 質感升級：輕量化商品卡片 Grid */}
                 <div id="product-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-24 px-4 sm:px-0">
                   {filteredProducts.map((product) => (
                     <motion.div
@@ -901,30 +895,29 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                         setActiveImageIdx(0);
                         setSelectedVariant(product.variants[0] || '');
                         setSelectedQuantity(1);
-                        // 更新網址列的小尾巴
                         const previewImage = Array.isArray(product.images) ? product.images[0] : product.images;
                         const newUrl = `?id=${product.id}&img=${encodeURIComponent(previewImage || '')}`;
                         window.history.pushState(null, '', newUrl);
                       }}
-                      className={`group cursor-pointer bg-white rounded-2xl overflow-hidden border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917] hover:-translate-y-1 hover:shadow-[7px_7px_0px_0px_#1c1917] transition-all duration-200 flex flex-col ${
+                      // 🌟 減法美學：邊框變細(border-2)、背景改純白，陰影收斂
+                      className={`group cursor-pointer bg-white rounded-2xl overflow-hidden border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_#1c1917] transition-all duration-300 flex flex-col ${
                         product.category === 'welfare' ? 'col-span-2 lg:col-span-4' : ''
                       } ${isExpired(product.countdownTarget) ? 'opacity-50 grayscale-[80%]' : ''}`}
                     >
-                      {/* 圖片區塊：底邊加粗黑線分隔 */}
-                      <div className={`relative w-full overflow-hidden bg-white border-b-[3px] border-stone-900 ${product.category === 'welfare' ? 'aspect-video' : 'aspect-square'}`}>
+                      {/* 圖片區塊 */}
+                      <div className={`relative w-full overflow-hidden bg-stone-50 border-b-2 border-stone-900/10 ${product.category === 'welfare' ? 'aspect-video' : 'aspect-square'}`}>
                         <img
                           src={product.images[0]}
                           alt={product.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
                           referrerPolicy="no-referrer"
                         />
-                        {/* 標籤貼紙：鮮豔跳色 + 粗黑邊框 */}
+                        {/* 標籤貼紙：維持鮮豔，作為視覺亮點 */}
                         {product.status === 'limited' && (
                           <div className="absolute top-3 left-3 bg-[#FF5757] text-white text-[10px] sm:text-xs font-black px-2.5 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] tracking-widest flex items-center gap-1">
                             <Clock className="w-3 h-3" /> 限時優惠
                           </div>
                         )}
-                        {/* 老闆娘專屬隱藏標籤 */}
                         {product.status === 'hidden' && (
                           <div className="absolute top-3 right-3 bg-stone-800 text-[#FFD700] text-[10px] sm:text-xs font-black px-2.5 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] tracking-widest flex items-center gap-1 z-10">
                             👻 暫時下架
@@ -937,44 +930,42 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                         )}
                       </div>
 
-                      {/* 資訊區塊 */}
-                      <div className="p-4 sm:p-5 flex flex-col flex-1 bg-[#FFFBEB]">
+                      {/* 資訊區塊：純白背景，讓視覺呼吸 */}
+                      <div className="p-4 flex flex-col flex-1 bg-white">
                         <div className="flex justify-between items-start mb-2">
-                          {/* 分類小標 */}
-                          <span className="text-[10px] sm:text-xs font-black text-[#FF5757] uppercase tracking-widest bg-white px-2 py-1 rounded-md border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917]">
+                          <span className="text-[10px] sm:text-xs font-bold text-stone-500 bg-stone-100 px-2 py-1 rounded-md">
                             {product.category === 'health' ? '保健食品' : product.category === 'daily' ? '生活百貨' : product.category === 'limited' ? '限時優惠' : product.category === 'pet' ? '寵物專區' : '福利區'}
                           </span>
-                          {/* 收藏愛心：改成立體小方塊 */}
                           <button 
                             onClick={(e) => toggleFavorite(product.id, e)}
-                            className={`p-1.5 rounded-lg border-2 border-stone-900 transition-colors shadow-[2px_2px_0px_0px_#1c1917] active:translate-y-[2px] active:shadow-none ${favorites.includes(product.id) ? 'bg-[#FF90E8]' : 'bg-white hover:bg-[#FFD700]'}`}
+                            className={`p-1.5 rounded-full transition-colors ${favorites.includes(product.id) ? 'bg-rose-50' : 'bg-transparent hover:bg-stone-100'}`}
                           >
-                            <Heart className={`w-4 h-4 ${favorites.includes(product.id) ? 'text-stone-900 fill-stone-900' : 'text-stone-900'}`} />
+                            <Heart className={`w-4 h-4 ${favorites.includes(product.id) ? 'text-rose-500 fill-rose-500' : 'text-stone-400'}`} />
                           </button>
                         </div>
                         
-                        <h3 className="text-base sm:text-lg font-black text-stone-900 mb-2 line-clamp-2 leading-tight">
+                        <h3 className="text-sm sm:text-base font-bold text-stone-900 mb-2 line-clamp-2 leading-snug">
                           {product.name}
                         </h3>
                         
-                        {/* 價格與偽按鈕引導區塊 */}
-                        <div className="mt-auto pt-3">
+                        {/* 價格與按鈕 */}
+                        <div className="mt-auto pt-3 border-t border-stone-100">
                           {product.category !== 'welfare' && (
-                            <div className="flex items-end gap-2 mb-3">
-                              <span className="text-xl sm:text-2xl font-black text-stone-900">
+                            <div className="flex items-center gap-2 mb-3">
+                              <span className="text-lg sm:text-xl font-black text-rose-500">
                                 ${product.price}
                               </span>
                               {product.originalPrice && (
-                                <span className="text-xs sm:text-sm text-stone-500 font-bold line-through mb-1">
+                                <span className="text-xs sm:text-sm text-stone-400 line-through">
                                   ${product.originalPrice}
                                 </span>
                               )}
                             </div>
                           )}
                           
-                          {/* 🌟 偽裝成按鈕的視覺引導：萊姆綠 -> 亮黃色 */}
-                          <div className="w-full bg-[#A3E635] border-2 border-stone-900 text-stone-900 text-sm sm:text-base font-black py-2.5 rounded-xl text-center shadow-[3px_3px_0px_0px_#1c1917] group-hover:bg-[#FFD700] transition-colors mt-2">
-                            查看詳情 🚀
+                          {/* 🌟 隱藏式按鈕：平時乾淨白底，滑過才變成醒目黃色積木 */}
+                          <div className="w-full bg-white border-2 border-stone-200 text-stone-500 text-sm font-bold py-2 rounded-xl text-center group-hover:border-stone-900 group-hover:bg-[#FFD700] group-hover:text-stone-900 group-hover:shadow-[2px_2px_0px_0px_#1c1917] transition-all">
+                            查看商品
                           </div>
                         </div>
                       </div>
