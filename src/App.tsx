@@ -733,28 +733,32 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col items-center justify-center min-h-[60vh] text-center"
+            className="flex flex-col items-center justify-center py-32 text-center"
           >
-            {/* 💡 注入動畫樣式 */}
-            <style>{loadingStyles}</style>
+            {/* 💡 注入動畫樣式 (讓星星跳動旋轉) */}
+            <style>{`
+              @keyframes block-bounce-rotate {
+                0%, 100% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(10deg); }
+              }
+              .animate-block-curious {
+                animation: block-bounce-rotate 1s ease-in-out infinite;
+              }
+            `}</style>
             
-            <div className="relative mb-10">
+            <div className="relative mb-8 mt-10">
               {/* 手繪積木星星：黃底、粗黑邊、立體黑影 */}
-              <div className="w-24 h-24 rounded-2xl bg-[#FFD700] border-[4px] border-stone-900 shadow-[6px_6px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 animate-block-curious relative mx-auto">
-                <Sparkles className="w-12 h-12 fill-current" />
+              <div className="w-20 h-20 rounded-2xl bg-[#FFD700] border-[4px] border-stone-900 shadow-[6px_6px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 animate-block-curious relative mx-auto">
+                <Sparkles className="w-10 h-10 fill-current" />
               </div>
             </div>
 
             {/* 品牌感歡迎語 */}
             <div className="bg-[#FFFBEB] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] px-6 py-2 rounded-xl transform rotate-1 inline-block">
-              <span className="text-xl font-black text-stone-900 tracking-tight">
-                正在為您打包小宇宙的好物... ✨
+              <span className="text-lg font-black text-stone-900 tracking-tight">
+                正在打包小宇宙的好物... ✨
               </span>
             </div>
-            
-            <p className="mt-4 text-stone-600 font-bold text-sm bg-white px-3 py-1 rounded-full border border-stone-200 shadow-inner inline-block">
-              * 首次載入約需 10-15 秒，請稍候喔！
-            </p>
           </motion.div>
         ) : (
           <AnimatePresence>
