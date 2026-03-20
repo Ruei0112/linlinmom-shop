@@ -842,7 +842,8 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 )}
 
                 {/* Product Grid */}
-                <div id="product-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-24">
+                {/* 🌟 繽紛手繪風：立體積木商品卡片 Grid */}
+                <div id="product-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-24 px-4 sm:px-0">
                   {filteredProducts.map((product) => (
                     <motion.div
                       layoutId={`product-${product.id}`}
@@ -852,81 +853,88 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                         setActiveImageIdx(0);
                         setSelectedVariant(product.variants[0] || '');
                         setSelectedQuantity(1);
-                        // 1. 抓出商品的第一張圖片
-const previewImage = Array.isArray(product.images) ? product.images[0] : product.images;
-
-// 2. 組合出帶有小尾巴的新網址
-const newUrl = `?id=${product.id}&img=${encodeURIComponent(previewImage || '')}`;
-
-// 3. 更新瀏覽器的網址列
-window.history.pushState(null, '', newUrl);
+                        // 更新網址列的小尾巴
+                        const previewImage = Array.isArray(product.images) ? product.images[0] : product.images;
+                        const newUrl = `?id=${product.id}&img=${encodeURIComponent(previewImage || '')}`;
+                        window.history.pushState(null, '', newUrl);
                       }}
-                      className={`group cursor-pointer bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-rose-200/50 ${
+                      className={`group cursor-pointer bg-white rounded-2xl overflow-hidden border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917] hover:-translate-y-1 hover:shadow-[7px_7px_0px_0px_#1c1917] transition-all duration-200 flex flex-col ${
                         product.category === 'welfare' ? 'col-span-2 lg:col-span-4' : ''
-                      } ${isExpired(product.countdownTarget) ? 'opacity-40 grayscale-[50%]' : ''}`}
+                      } ${isExpired(product.countdownTarget) ? 'opacity-50 grayscale-[80%]' : ''}`}
                     >
-                    <div className={`relative w-full overflow-hidden bg-white ${product.category === 'welfare' ? 'aspect-video' : 'aspect-square'}`}>
-    {/* 🌟 更新：首頁固定 4:5 比例 (福利區維持長條)，使用 object-cover 完美填滿 */}
-    <img
-      src={product.images[0]}
-      alt={product.name}
-      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-      referrerPolicy="no-referrer"
-    />
+                      {/* 圖片區塊：底邊加粗黑線分隔 */}
+                      <div className={`relative w-full overflow-hidden bg-white border-b-[3px] border-stone-900 ${product.category === 'welfare' ? 'aspect-video' : 'aspect-square'}`}>
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          referrerPolicy="no-referrer"
+                        />
+                        {/* 標籤貼紙：鮮豔跳色 + 粗黑邊框 */}
                         {product.status === 'limited' && (
-                          <div className="absolute top-4 left-4 bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
+                          <div className="absolute top-3 left-3 bg-[#FF5757] text-white text-[10px] sm:text-xs font-black px-2.5 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] tracking-widest flex items-center gap-1">
                             <Clock className="w-3 h-3" /> 限時優惠
                           </div>
                         )}
-                      {/* 🌟 老闆娘專屬：隱身防呆標籤（放在右上角） */}
+                        {/* 老闆娘專屬隱藏標籤 */}
                         {product.status === 'hidden' && (
-                          <div className="absolute top-4 right-4 bg-stone-800/90 backdrop-blur-sm text-orange-50 text-[10px] font-bold px-3 py-1 rounded-full tracking-widest flex items-center gap-1 shadow-md border border-stone-600">
+                          <div className="absolute top-3 right-3 bg-stone-800 text-[#FFD700] text-[10px] sm:text-xs font-black px-2.5 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] tracking-widest flex items-center gap-1 z-10">
                             👻 暫時下架
                           </div>
                         )}
                         {product.category === 'welfare' && (
-                          <div className="absolute top-4 left-4 bg-stone-700 text-orange-50 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
+                          <div className="absolute top-3 left-3 bg-[#FF90E8] text-stone-900 text-[10px] sm:text-xs font-black px-2.5 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] tracking-widest flex items-center gap-1">
                             <Sparkles className="w-3 h-3" /> 粉絲福利
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
-                      <div className="p-6">
+
+                      {/* 資訊區塊 */}
+                      <div className="p-4 sm:p-5 flex flex-col flex-1 bg-[#FFFBEB]">
                         <div className="flex justify-between items-start mb-2">
-                          {/* 🌟 修復 3：分類標籤顯示正確名稱 */}
-                          <span className="text-[10px] font-bold text-rose-500 uppercase tracking-widest">
-                            {product.category === 'health' ? '保健食品' : product.category === 'daily' ? '生活百貨' : product.category === 'limited' ? '限時優惠' : product.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
+                          {/* 分類小標 */}
+                          <span className="text-[10px] sm:text-xs font-black text-[#FF5757] uppercase tracking-widest bg-white px-2 py-1 rounded-md border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917]">
+                            {product.category === 'health' ? '保健食品' : product.category === 'daily' ? '生活百貨' : product.category === 'limited' ? '限時優惠' : product.category === 'pet' ? '寵物專區' : '福利區'}
                           </span>
+                          {/* 收藏愛心：改成立體小方塊 */}
                           <button 
                             onClick={(e) => toggleFavorite(product.id, e)}
-                            className="p-1.5 rounded-full hover:bg-rose-200/50 transition-colors"
+                            className={`p-1.5 rounded-lg border-2 border-stone-900 transition-colors shadow-[2px_2px_0px_0px_#1c1917] active:translate-y-[2px] active:shadow-none ${favorites.includes(product.id) ? 'bg-[#FF90E8]' : 'bg-white hover:bg-[#FFD700]'}`}
                           >
-                            <Heart className={`w-4 h-4 transition-colors ${favorites.includes(product.id) ? 'text-rose-500 fill-rose-500' : 'text-rose-400'}`} />
+                            <Heart className={`w-4 h-4 ${favorites.includes(product.id) ? 'text-stone-900 fill-stone-900' : 'text-stone-900'}`} />
                           </button>
                         </div>
-                        <h3 className="text-lg font-bold text-stone-900 mb-2 line-clamp-1">
-  {product.name}
-</h3>
-                        {product.category !== 'welfare' && (
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-xl font-bold text-stone-700">
-                              ${product.price}
-                            </span>
-                            {product.originalPrice && (
-                              <span className="text-sm text-stone-700/40 line-through">
-                                ${product.originalPrice}
+                        
+                        <h3 className="text-base sm:text-lg font-black text-stone-900 mb-2 line-clamp-2 leading-tight">
+                          {product.name}
+                        </h3>
+                        
+                        {/* 價格與偽按鈕引導區塊 */}
+                        <div className="mt-auto pt-3">
+                          {product.category !== 'welfare' && (
+                            <div className="flex items-end gap-2 mb-3">
+                              <span className="text-xl sm:text-2xl font-black text-stone-900">
+                                ${product.price}
                               </span>
-                            )}
+                              {product.originalPrice && (
+                                <span className="text-xs sm:text-sm text-stone-500 font-bold line-through mb-1">
+                                  ${product.originalPrice}
+                                </span>
+                              )}
+                            </div>
+                          )}
+                          
+                          {/* 🌟 偽裝成按鈕的視覺引導：萊姆綠 -> 亮黃色 */}
+                          <div className="w-full bg-[#A3E635] border-2 border-stone-900 text-stone-900 text-sm sm:text-base font-black py-2.5 rounded-xl text-center shadow-[3px_3px_0px_0px_#1c1917] group-hover:bg-[#FFD700] transition-colors mt-2">
+                            查看詳情 🚀
                           </div>
-                        )}
-                        <div className="mt-4 flex items-center text-sm font-medium text-stone-700/60 group-hover:text-rose-500 transition-colors">
-                          查看詳情 <ChevronRight className="w-4 h-4 ml-1" />
                         </div>
                       </div>
                     </motion.div>
                   ))}
                 </div>
 
+                
                 {/* Simple Three Steps Section */}
                 <section className="py-24 border-t border-rose-200">
                   <div className="text-center mb-16">
