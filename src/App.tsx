@@ -612,28 +612,6 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
     { id: 'welfare', name: '林林媽粉絲福利區', icon: <Sparkles className="w-4 h-4" /> },
   ];
 
-// 👇 貼在這裡！在主 return 的正上方 👇
-  {/* 🌟 繽紛手繪風：定義積木跳動與旋轉動畫 */}
-  const loadingStyles = `
-    @keyframes block-bounce-rotate {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-      }
-      50% {
-        transform: translateY(-20px) rotate(10deg);
-      }
-    }
-    .animate-block-curious {
-      animation: block-bounce-rotate 1s ease-in-out infinite;
-    }
-  `;
-
-  // 👇 這是你剛剛搜尋到的目標 👇
-  return (
-    <div className="min-h-screen bg-orange-50/30 font-sans selection:bg-rose-500/30 text-stone-800">
-      {/* Header */}
-      {/* 🌟 繽紛手繪風：頂部招牌 */}
-      <header className="sticky top-0 z-40 bg-[#FFFBEB] border-b-4 border-stone-900">
 
   return (
     <div className="min-h-screen bg-orange-50/30 font-sans selection:bg-rose-500/30 text-stone-800">
