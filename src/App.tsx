@@ -619,24 +619,36 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
       <header className="sticky top-0 z-40 bg-[#FFFBEB] border-b-4 border-stone-900">
         <div className="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between">
           
-          {/* Logo 區塊：傾斜的圖示 + 粗體字 */}
-          <button 
-            onClick={() => {
-              setSelectedProduct(null); 
-              setSearchQuery('');       
-              setActiveCategory('all'); 
-              window.history.pushState(null, '', window.location.pathname); 
-              window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            }}
-            className="flex items-center gap-3 hover:-translate-y-1 transition-transform text-left group"
-          >
-            <div className="w-12 h-12 rounded-2xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 transform -rotate-6 group-hover:rotate-0 transition-transform">
-              <Sparkles className="w-7 h-7 fill-current" />
-            </div>
-            <h1 className="text-2xl font-black text-stone-900 tracking-tight">
-              林林媽開團小宇宙
-            </h1>
-          </button>
+          {/* 左側群組：漢堡選單 + Logo 區塊 */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            
+            {/* 🌟 手繪風：漢堡選單按鈕 */}
+            <button 
+              onClick={() => setIsSidebarOpen(true)}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_#1c1917] hover:bg-[#A3E635] transition-all"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+
+            {/* Logo 區塊：傾斜的圖示 + 粗體字 */}
+            <button 
+              onClick={() => {
+                setSelectedProduct(null); 
+                setSearchQuery('');       
+                setActiveCategory('all'); 
+                window.history.pushState(null, '', window.location.pathname); 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+              }}
+              className="flex items-center gap-2 sm:gap-3 hover:-translate-y-1 transition-transform text-left group"
+            >
+              <div className="hidden sm:flex w-12 h-12 rounded-2xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] items-center justify-center text-stone-900 transform -rotate-6 group-hover:rotate-0 transition-transform">
+                <Sparkles className="w-7 h-7 fill-current" />
+              </div>
+              <h1 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
+                林林媽開團小宇宙
+              </h1>
+            </button>
+          </div>
 
           {/* 右側按鈕群組 */}
           <div className="flex items-center gap-4">
@@ -793,26 +805,41 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
                 {/* Category Tabs */}
                 {/* 🌟 修改版：可愛質感「膠囊」下拉式分類選單 */}
-                {/* 🌟 繽紛手繪風：吸頂橫向滑動分類標籤 */}
+                {/* 🌟 繽紛手繪風：吸頂橫向滑動分類標籤 (直覺優化版) */}
         {!selectedProduct && !isLoading && (
-          <div className="sticky top-20 z-30 bg-[#FFFBEB] pt-4 pb-4 border-b-2 border-stone-900/10 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x">
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id as any)}
-                  className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl border-2 border-stone-900 font-bold text-sm sm:text-base flex items-center gap-2 transition-all duration-200 ${
-                    activeCategory === cat.id
-                      ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] -translate-y-1' // 🌟 選中時：亮粉色 + 浮起立體陰影
-                      : 'bg-white text-stone-900 hover:bg-[#FFD700] hover:shadow-[3px_3px_0px_0px_#1c1917] hover:-translate-y-1' // 🌟 沒選中時：白底，滑過變黃色
-                  }`}
-                >
-                  <span className={activeCategory === cat.id ? 'text-stone-900' : 'text-stone-500'}>
-                    {cat.icon}
-                  </span>
-                  {cat.name}
-                </button>
-              ))}
+          <div className="sticky top-20 z-30 bg-[#FFFBEB] pt-3 pb-4 border-b-[3px] border-stone-900 mb-8 -mx-4 sm:mx-0">
+            
+            {/* 💡 魔法一：手繪感滑動提示小貼紙 */}
+            <div className="px-4 sm:px-0 mb-2 flex items-center justify-end">
+              <span className="text-[10px] sm:text-xs font-black text-stone-600 bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] px-2.5 py-1 rounded-lg flex items-center gap-1 transform rotate-2">
+                左右滑動看更多 <ChevronRight className="w-3 h-3" />
+              </span>
+            </div>
+
+            {/* 外層包覆 relative，用來放置漸層遮罩 */}
+            <div className="relative">
+              {/* 加上 pr-12 (右側內距)，確保最後一個按鈕滑到底時不會貼死螢幕邊緣 */}
+              <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x px-4 pr-12 sm:px-0 sm:pr-0">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id as any)}
+                    className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl border-2 border-stone-900 font-black text-sm sm:text-base flex items-center gap-2 transition-all duration-200 ${
+                      activeCategory === cat.id
+                        ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] translate-y-[-2px]' 
+                        : 'bg-white text-stone-900 hover:bg-[#FFD700] shadow-[1px_1px_0px_0px_#1c1917] hover:shadow-[3px_3px_0px_0px_#1c1917] hover:translate-y-[-2px]' 
+                    }`}
+                  >
+                    <span className={activeCategory === cat.id ? 'text-stone-900' : 'text-stone-400'}>
+                      {cat.icon}
+                    </span>
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+              
+              {/* 💡 魔法二：右側漸層遮罩 (營造出後面還有東西的視覺暗示，僅限手機版顯示) */}
+              <div className="absolute top-0 right-0 bottom-2 w-10 bg-gradient-to-l from-[#FFFBEB] to-transparent pointer-events-none sm:hidden"></div>
             </div>
           </div>
         )}
@@ -1849,7 +1876,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
         )}
       </AnimatePresence>
 
-{/* 🌟 新增：左側滑出分類側邊欄 */}
+{/* 🌟 繽紛手繪風：左側滑出分類側邊欄 */}
       <AnimatePresence>
         {isSidebarOpen && (
           <div className="fixed inset-0 z-50 overflow-hidden">
@@ -1859,47 +1886,48 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsSidebarOpen(false)}
-              className="absolute inset-0 bg-stone-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
             />
-            {/* 側邊欄白底面板 (加上右側可愛圓角) */}
+            
+            {/* 🌟 手繪積木風側邊欄面板 */}
             <motion.div 
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute top-0 left-0 h-full w-[75%] max-w-sm bg-orange-50 shadow-2xl flex flex-col rounded-r-[30px] overflow-hidden"
+              className="absolute top-0 left-0 h-full w-[80%] max-w-sm bg-[#FFFBEB] border-r-[4px] border-stone-900 shadow-[10px_0px_0px_0px_rgba(28,25,23,0.3)] flex flex-col overflow-hidden z-50"
             >
               {/* 側邊欄頭部 */}
-              <div className="p-6 border-b border-rose-200 flex justify-between items-center bg-orange-50/80 backdrop-blur-md">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
-                    <Sparkles className="w-4 h-4 fill-current" />
+              <div className="p-6 border-b-[4px] border-stone-900 flex justify-between items-center bg-[#FFD700]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 transform rotate-3">
+                    <Sparkles className="w-5 h-5 fill-current" />
                   </div>
-                  <h3 className="text-lg font-bold text-stone-900">商品分類</h3>
+                  <h3 className="text-xl font-black text-stone-900">商品分類</h3>
                 </div>
-                <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-stone-700 hover:text-rose-500 bg-white rounded-full shadow-sm">
-                  <X className="w-5 h-5" />
+                <button onClick={() => setIsSidebarOpen(false)} className="w-10 h-10 bg-white border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] rounded-xl flex items-center justify-center text-stone-900 hover:bg-[#FF5757] hover:text-white hover:-translate-y-1 active:translate-y-[2px] active:shadow-none transition-all">
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
               {/* 分類按鈕清單 */}
-              <div className="flex-1 overflow-y-auto py-6 px-4 space-y-3">
+              <div className="flex-1 overflow-y-auto py-8 px-5 space-y-4 bg-[#FFFBEB]">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => {
-                      setActiveCategory(cat.id as any); // 切換分類
-                      setSelectedProduct(null); // 如果在商品詳細頁，自動退回列表
-                      setIsSidebarOpen(false); // 點擊後自動收起側邊欄
-                      window.scrollTo({ top: 0, behavior: 'smooth' }); // 自動滾回最上方
+                      setActiveCategory(cat.id as any);
+                      setSelectedProduct(null);
+                      setIsSidebarOpen(false);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
-                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl text-base font-bold transition-all duration-300 ${
+                    className={`w-full flex items-center gap-4 px-5 py-4 rounded-2xl border-[3px] border-stone-900 text-lg font-black transition-all duration-200 ${
                       activeCategory === cat.id
-                        ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30'
-                        : 'bg-white text-stone-700 hover:bg-rose-100 border border-transparent shadow-sm'
+                        ? 'bg-[#FF90E8] text-stone-900 shadow-[4px_4px_0px_0px_#1c1917] translate-y-[-2px]'
+                        : 'bg-white text-stone-900 shadow-[2px_2px_0px_0px_#1c1917] hover:bg-[#A3E635] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_#1c1917]'
                     }`}
                   >
-                    <span className={`${activeCategory === cat.id ? 'text-white' : 'text-rose-400'}`}>
+                    <span className="text-stone-900 bg-white border-2 border-stone-900 rounded-lg p-1">
                       {cat.icon}
                     </span>
                     {cat.name}
