@@ -601,89 +601,52 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
   return (
     <div className="min-h-screen bg-orange-50/30 font-sans selection:bg-rose-500/30 text-stone-800">
       {/* Header */}
-     <header className="sticky top-0 z-40 bg-orange-50/80 backdrop-blur-md border-b border-rose-200">
-        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3"> {/* 👈 這裡的 gap-2 改成 gap-3 */}
-            
-            {/* 🌟 新增：左側漢堡選單按鈕 */}
-            <button 
-              onClick={() => setIsSidebarOpen(true)}
-              className="p-2 -ml-2 rounded-full hover:bg-rose-200 transition-colors text-stone-700"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
+     {/* 🌟 繽紛手繪風：頂部招牌 */}
+      <header className="sticky top-0 z-40 bg-[#FFFBEB] border-b-4 border-stone-900">
+        <div className="max-w-5xl mx-auto px-4 h-20 flex items-center justify-between">
+          
+          {/* Logo 區塊：傾斜的圖示 + 粗體字 */}
+          <button 
+            onClick={() => {
+              setSelectedProduct(null); 
+              setSearchQuery('');       
+              setActiveCategory('all'); 
+              window.history.pushState(null, '', window.location.pathname); 
+              window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            }}
+            className="flex items-center gap-3 hover:-translate-y-1 transition-transform text-left group"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 transform -rotate-6 group-hover:rotate-0 transition-transform">
+              <Sparkles className="w-7 h-7 fill-current" />
+            </div>
+            <h1 className="text-2xl font-black text-stone-900 tracking-tight">
+              林林媽開團小宇宙
+            </h1>
+          </button>
 
-            {/* 原本的 Logo 與標題按鈕 (維持你剛才改好的樣子) */}
-            <button 
-              onClick={() => {
-                setSelectedProduct(null); 
-                setSearchQuery('');       
-                setActiveCategory('all'); 
-                window.history.pushState(null, '', window.location.pathname); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-              }}
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity text-left"
-            >
-              <div className="w-10 h-10 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
-                <Sparkles className="w-6 h-6 fill-current" />
-              </div>
-              <h1 className="text-xl font-bold text-stone-900 tracking-tight line-clamp-1">
-                林林媽開團小宇宙
-              </h1>
-            </button>
-          </div>
-          {/* ... 後面的右側按鈕區塊維持原樣 ... */}
+          {/* 右側按鈕群組 */}
           <div className="flex items-center gap-4">
             {isAdmin ? (
               <div className="flex items-center gap-3">
-                <button 
-                  onClick={() => {
-                    const newProduct: Product = {
-                      id: '',
-                      name: '新商品',
-                      category: 'health',
-                      price: 0,
-                      images: [''],
-                      description: '',
-                      features: [''],
-                      status: 'available',
-                      variants: [],
-                      isAnnouncement: false
-                    };
-                    setEditForm(newProduct);
-                    setIsEditing(true);
-                    setIsConfirmingDelete(false);
-                    setSelectedProduct(newProduct);
-                  }}
-                  className="flex items-center gap-1 text-xs font-bold text-stone-700 bg-rose-200 px-3 py-1.5 rounded-full hover:bg-rose-200/70 transition-colors"
-                >
-                  <Plus className="w-3 h-3" /> 新增商品
-                </button>
-                <span className="text-xs font-bold text-rose-600 bg-rose-200 px-2 py-1 rounded">管理員模式</span>
-                <button 
-                  onClick={handleLogout}
-                  className="p-2 rounded-full hover:bg-rose-200 transition-colors text-stone-700"
-                  title="登出"
-                >
+                <span className="text-xs font-black text-stone-900 bg-[#FFD700] border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] px-2 py-1 rounded-md">管理員</span>
+                <button onClick={handleLogout} className="p-2 rounded-full border-2 border-transparent hover:border-stone-900 hover:bg-[#FFD700] transition-colors text-stone-900">
                   <LogOut className="w-5 h-5" />
                 </button>
               </div>
             ) : (
-              <button 
-                onClick={() => setIsLoginModalOpen(true)}
-                className="p-2 rounded-full hover:bg-rose-200 transition-colors text-stone-700"
-                title="管理員登入"
-              >
+              <button onClick={() => setIsLoginModalOpen(true)} className="p-2 rounded-full border-2 border-transparent hover:border-stone-900 hover:bg-[#FFD700] transition-colors text-stone-900">
                 <User className="w-6 h-6" />
               </button>
             )}
+            
+            {/* 🌟 手繪風：立體購物車按鈕 */}
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="p-2 rounded-full hover:bg-rose-200 transition-colors relative"
+              className="w-12 h-12 rounded-full bg-[#FFD700] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_#1c1917] transition-all relative"
             >
-              <ShoppingBag className="w-6 h-6 text-stone-700" />
+              <ShoppingBag className="w-6 h-6 text-stone-900" />
               {cart.length > 0 && (
-                <span className="absolute top-0 right-0 w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-orange-50">
+                <span className="absolute -top-2 -right-2 w-6 h-6 bg-[#FF5757] text-white text-xs font-black rounded-full border-2 border-stone-900 flex items-center justify-center">
                   {cart.reduce((sum, item) => sum + item.quantity, 0)}
                 </span>
               )}
@@ -816,27 +779,29 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
                 {/* Category Tabs */}
                 {/* 🌟 修改版：可愛質感「膠囊」下拉式分類選單 */}
-                <div className="mb-8 w-full max-w-sm mx-auto px-4">
-                  <div className="relative group">
-                    <select
-                      value={activeCategory}
-                      onChange={(e) => setActiveCategory(e.target.value as any)}
-                      className="w-full p-4 pl-6 pr-12 appearance-none bg-white border-2 border-rose-200 text-stone-700 text-base font-bold focus:outline-none focus:border-rose-400 rounded-full shadow-md cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-rose-300"
-                    >
-                      {categories.map((cat) => (
-                        <option key={cat.id} value={cat.id}>
-                          {cat.name}
-                        </option>
-                      ))}
-                    </select>
-                    {/* 圓潤版下拉箭頭 */}
-                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-6 text-rose-400 group-hover:text-rose-500 transition-colors">
-                      <svg className="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+                {/* 🌟 繽紛手繪風：吸頂橫向滑動分類標籤 */}
+        {!selectedProduct && !isLoading && (
+          <div className="sticky top-20 z-30 bg-[#FFFBEB] pt-4 pb-4 border-b-2 border-stone-900/10 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 snap-x">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id as any)}
+                  className={`snap-start flex-shrink-0 px-5 py-2.5 rounded-xl border-2 border-stone-900 font-bold text-sm sm:text-base flex items-center gap-2 transition-all duration-200 ${
+                    activeCategory === cat.id
+                      ? 'bg-[#FF90E8] text-stone-900 shadow-[3px_3px_0px_0px_#1c1917] -translate-y-1' // 🌟 選中時：亮粉色 + 浮起立體陰影
+                      : 'bg-white text-stone-900 hover:bg-[#FFD700] hover:shadow-[3px_3px_0px_0px_#1c1917] hover:-translate-y-1' // 🌟 沒選中時：白底，滑過變黃色
+                  }`}
+                >
+                  <span className={activeCategory === cat.id ? 'text-stone-900' : 'text-stone-500'}>
+                    {cat.icon}
+                  </span>
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
                 {/* Product Grid */}
                 <div id="product-grid" className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-24">
