@@ -1876,7 +1876,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
         )}
       </AnimatePresence>
 
-{/* 🌟 繽紛手繪風：左側滑出分類側邊欄 */}
+{/* 🌟 繽紛手繪風：左側滑出分類側邊欄 (終極完整版) */}
       <AnimatePresence>
         {isSidebarOpen && (
           <div className="fixed inset-0 z-50 overflow-hidden">
@@ -1889,7 +1889,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               className="absolute inset-0 bg-stone-900/60 backdrop-blur-sm"
             />
             
-            {/* 🌟 手繪積木風側邊欄面板 */}
+            {/* 🌟 手繪積木風側邊欄面板主體 */}
             <motion.div 
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
@@ -1897,21 +1897,21 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="absolute top-0 left-0 h-full w-[80%] max-w-sm bg-[#FFFBEB] border-r-[4px] border-stone-900 shadow-[10px_0px_0px_0px_rgba(28,25,23,0.3)] flex flex-col overflow-hidden z-50"
             >
-              {/* 側邊欄頭部 */}
-              <div className="p-6 border-b-[4px] border-stone-900 flex justify-between items-center bg-[#FFD700]">
+              {/* 1. 側邊欄頭部 (黃底) */}
+              <div className="p-6 border-b-[4px] border-stone-900 flex justify-between items-center bg-[#FFD700] flex-shrink-0">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 transform rotate-3">
                     <Sparkles className="w-5 h-5 fill-current" />
                   </div>
-                  <h3 className="text-xl font-black text-stone-900">商品分類</h3>
+                  <h3 className="text-xl font-black text-stone-900">林林媽的小宇宙</h3>
                 </div>
                 <button onClick={() => setIsSidebarOpen(false)} className="w-10 h-10 bg-white border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] rounded-xl flex items-center justify-center text-stone-900 hover:bg-[#FF5757] hover:text-white hover:-translate-y-1 active:translate-y-[2px] active:shadow-none transition-all">
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
-{/* 🌟 側邊欄專屬：手繪風搜尋框 */}
-              <div className="p-5 border-b-[4px] border-stone-900 bg-[#FFFBEB]">
+              {/* 2. 側邊欄專屬：手繪風搜尋框 */}
+              <div className="p-5 border-b-[4px] border-stone-900 bg-[#FFFBEB] flex-shrink-0">
                 <div className="relative">
                   <input
                     type="text"
@@ -1919,7 +1919,6 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     onKeyDown={(e) => {
-                      // 💡 貼心魔法：手機鍵盤按下 Enter 搜尋後，自動收起側邊欄讓粉絲看結果！
                       if (e.key === 'Enter') {
                         setIsSidebarOpen(false); 
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1938,8 +1937,8 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 </div>
               </div>
 
-              {/* 分類按鈕清單 */}
-              <div className="flex-1 overflow-y-auto py-8 px-5 space-y-4 bg-[#FFFBEB]">
+              {/* 3. 分類按鈕清單 (中間滑動區塊) */}
+              <div className="flex-1 overflow-y-auto py-6 px-5 space-y-4 bg-[#FFFBEB]">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
@@ -1955,7 +1954,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                         : 'bg-white text-stone-900 shadow-[2px_2px_0px_0px_#1c1917] hover:bg-[#A3E635] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_#1c1917]'
                     }`}
                   >
-                    <span className="text-stone-900 bg-white border-2 border-stone-900 rounded-lg p-1">
+                    <span className="text-stone-900 bg-white border-2 border-stone-900 rounded-lg p-1 shadow-sm">
                       {cat.icon}
                     </span>
                     {cat.name}
@@ -1963,24 +1962,15 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 ))}
               </div>
 
-{/* 分類按鈕清單 */}
-              <div className="flex-1 overflow-y-auto py-8 px-5 space-y-4 bg-[#FFFBEB]">
-                {categories.map((cat) => (
-                  // ... (這裡是你原本的分類按鈕，保持不動) ...
-                ))}
-              </div>
-
-              {/* 🌟 繽紛手繪風：側邊欄底部社群連結 */}
-              <div className="p-6 border-t-[4px] border-stone-900 bg-[#A3E635] flex flex-col items-center gap-5 mt-auto z-10">
+              {/* 4. 側邊欄底部社群連結 (萊姆綠區塊) */}
+              <div className="p-6 border-t-[4px] border-stone-900 bg-[#A3E635] flex flex-col items-center gap-5 flex-shrink-0 z-10">
                 <span className="text-stone-900 font-black text-sm tracking-widest bg-white px-4 py-1.5 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform -rotate-2">
-                  關注林林媽日常 💛
+                  關注日常好物 💛
                 </span>
                 <div className="flex justify-center gap-6">
-                  {/* 立體 IG 按鈕 */}
                   <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform rotate-3">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" alt="IG" className="w-full h-full object-cover" />
                   </a>
-                  {/* 立體 LINE 按鈕 */}
                   <a href="https://line.me/R/ti/p/@linlinmom2828" target="_blank" rel="noreferrer" className="w-14 h-14 rounded-2xl bg-white border-[3px] border-stone-900 shadow-[4px_4px_0px_0px_#1c1917] flex items-center justify-center hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#1c1917] transition-all overflow-hidden transform -rotate-2 p-1">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/LINE_logo.svg/2048px-LINE_logo.svg.png" alt="LINE" className="w-full h-full object-cover" />
                   </a>
