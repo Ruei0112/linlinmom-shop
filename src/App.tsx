@@ -671,20 +671,20 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
 
       <main className="max-w-5xl mx-auto px-4 py-8">
         
-      {/* 🌟 新增：搜尋框區塊 (只有在首頁列表時才顯示) */}
+      {/* 🌟 繽紛手繪風：搜尋框 */}
         {!selectedProduct && !isLoading && (
-          <div className="mb-8 relative">
+          <div className="mb-8 relative px-4 sm:px-0">
             <input
               type="text"
-              placeholder="🔍 搜尋你想找的好物名稱或關鍵字..."
+              placeholder="🔍 搜尋你想找的好物或關鍵字..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full p-4 pl-6 rounded-2xl border-2 border-rose-100 focus:outline-none focus:border-rose-400 bg-white shadow-sm text-stone-700 font-medium transition-colors"
+              className="w-full p-4 pl-6 rounded-2xl border-[3px] border-stone-900 focus:outline-none focus:translate-y-[2px] focus:shadow-none bg-white shadow-[5px_5px_0px_0px_#1c1917] text-stone-900 font-black transition-all placeholder:text-stone-400"
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-rose-500 font-bold p-2"
+                className="absolute right-8 top-1/2 -translate-y-1/2 bg-[#FF5757] text-white border-2 border-stone-900 w-8 h-8 rounded-full flex items-center justify-center shadow-[2px_2px_0px_0px_#1c1917] hover:translate-y-[-2px] transition-transform font-black z-10"
               >
                 ✕
               </button>
@@ -934,7 +934,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                   ))}
                 </div>
 
-                
+
                 {/* Simple Three Steps Section */}
                 <section className="py-24 border-t border-rose-200">
                   <div className="text-center mb-16">
@@ -984,7 +984,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.4 }}
-                className="bg-white rounded-[40px] overflow-hidden shadow-2xl border border-rose-200/30"
+                className="bg-white rounded-3xl overflow-hidden border-[4px] border-stone-900 shadow-[8px_8px_0px_0px_#1c1917] sm:my-8"
               >
                 <div className="flex flex-col md:flex-row">
                   {/* Product Image */}
@@ -1097,10 +1097,9 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                         setSelectedProduct(null);
                         setIsEditing(false);
                         setIsConfirmingDelete(false);
-                        // 🌟 變換網址魔法：把網址後面的尾巴擦掉，變回乾淨的首頁
                         window.history.pushState(null, '', window.location.pathname);
                       }}
-                      className="absolute top-6 left-6 w-12 h-12 rounded-full bg-white/90 backdrop-blur shadow-lg flex items-center justify-center text-stone-900 hover:bg-rose-500 hover:text-white transition-all duration-300"
+                      className="absolute top-6 left-6 w-12 h-12 rounded-xl bg-[#FFD700] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_#1c1917] transition-all duration-200 z-10"
                     >
                       <ArrowLeft className="w-6 h-6" />
                     </button>
@@ -1453,68 +1452,69 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                     ) : (
                       <>
                         <div className="mb-8">
-                          <div className="flex items-center gap-2 mb-6">
-                            {/* 🌟 質感膠囊分類標籤 */}
-                            <span className="px-4 py-1.5 rounded-full bg-rose-100 text-rose-600 text-xs font-bold tracking-widest uppercase shadow-sm">
+                          <div className="flex items-center gap-3 mb-6">
+                            {/* 🌟 手繪風分類標籤 */}
+                            <span className="px-3 py-1.5 rounded-lg bg-[#FFD700] border-2 border-stone-900 text-stone-900 text-xs font-black tracking-widest uppercase shadow-[2px_2px_0px_0px_#1c1917]">
                               {selectedProduct.category === 'health' ? '保健食品' : selectedProduct.category === 'daily' ? '生活百貨' : selectedProduct.category === 'limited' ? '限時優惠' : selectedProduct.category === 'pet' ? '寵物專區' : '林林媽粉絲福利區'}
                             </span>
                             {selectedProduct.status === 'limited' && (
-                              <span className="px-4 py-1.5 rounded-full bg-rose-500 text-white text-xs font-bold tracking-widest uppercase flex items-center gap-1 shadow-md shadow-rose-500/30">
+                              <span className="px-3 py-1.5 rounded-lg bg-[#FF5757] border-2 border-stone-900 text-white text-xs font-black tracking-widest uppercase flex items-center gap-1 shadow-[2px_2px_0px_0px_#1c1917]">
                                 <Clock className="w-3 h-3" /> 限時優惠
                               </span>
                             )}
                           </div>
                           
-                          <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-4 leading-tight">
+                          <h2 className="text-3xl md:text-4xl font-black text-stone-900 mb-4 leading-tight">
                             {selectedProduct.name}
                           </h2>
 
-                          {/* 🌟 專屬詳細頁的限時倒數計時器 (圓潤版) */}
+                          {/* 限時倒數 */}
                           {selectedProduct.category === 'limited' && selectedProduct.countdownTarget && (
-                            <div className="mb-8 bg-rose-50/80 border-2 border-rose-200 rounded-2xl px-5 py-4 inline-flex items-center gap-4 shadow-sm">
-                              <span className="text-rose-600 text-sm font-bold flex items-center gap-1.5">
+                            <div className="mb-8 bg-[#E0E7FF] border-[3px] border-stone-900 rounded-2xl px-5 py-4 inline-flex items-center gap-4 shadow-[4px_4px_0px_0px_#1c1917]">
+                              <span className="text-stone-900 text-sm font-black flex items-center gap-1.5">
                                 <Clock className="w-5 h-5" /> 截團倒數
                               </span>
-                              <div className="flex items-center gap-1.5 font-mono text-xl font-bold text-rose-500">
-                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.days).padStart(2, '0')}</span>
-                                <span className="text-sm font-sans mr-2 pt-1 text-rose-600 font-bold">天</span>
-                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.hours).padStart(2, '0')}</span>
-                                <span className="animate-pulse text-rose-400">:</span>
-                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.minutes).padStart(2, '0')}</span>
-                                <span className="animate-pulse text-rose-400">:</span>
-                                <span className="bg-white px-3 py-1.5 rounded-xl shadow-sm border border-rose-100">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                              <div className="flex items-center gap-1.5 font-mono text-xl font-black text-stone-900">
+                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.days).padStart(2, '0')}</span>
+                                <span className="text-sm font-black">天</span>
+                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                <span>:</span>
+                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                <span>:</span>
+                                <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">{String(timeLeft.seconds).padStart(2, '0')}</span>
                               </div>
                             </div>
                           )}
 
+                          {/* 價格區塊 */}
                           {!selectedProduct.isAnnouncement && (
-                            <div className="flex flex-col gap-1 mb-8 p-6 bg-stone-50 rounded-3xl border border-stone-100">
+                            <div className="flex flex-col gap-1 mb-8 p-6 bg-[#A3E635] rounded-2xl border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917]">
                               {selectedProduct.originalPrice && (
-                                <div className="text-lg text-stone-400 font-medium tracking-wider mb-1">
+                                <div className="text-lg text-stone-800 font-bold tracking-wider mb-1">
                                   原價：<span className="line-through">${selectedProduct.originalPrice}</span>
                                 </div>
                               )}
-                              <div className="text-4xl font-extrabold text-rose-500 flex items-baseline gap-2">
-                                <span className="text-xl text-stone-700 font-bold tracking-wider">粉絲專屬優惠：</span>
+                              <div className="text-4xl font-black text-stone-900 flex items-baseline gap-2">
+                                <span className="text-xl font-black tracking-wider">粉絲專屬優惠：</span>
                                 ${selectedProduct.price}
                               </div>
                             </div>
                           )}
 
-                          <p className="text-stone-600 leading-relaxed mb-10 text-lg whitespace-pre-wrap">
+                          <p className="text-stone-700 font-bold leading-relaxed mb-10 text-lg whitespace-pre-wrap">
                             {selectedProduct.description}
                           </p>
 
-                          {/* 商品特色區塊 */}
+                          {/* 商品特色 */}
                           <div className="space-y-4 mb-10">
-                            <h4 className="text-sm font-bold text-stone-400 uppercase tracking-widest flex items-center gap-2">
+                            <h4 className="text-sm font-black text-stone-900 uppercase tracking-widest flex items-center gap-2 bg-[#FFFBEB] inline-block px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform -rotate-2 rounded-lg">
                               <Sparkles className="w-4 h-4" /> 商品特色
                             </h4>
-                            <ul className="grid grid-cols-1 gap-4">
+                            <ul className="grid grid-cols-1 gap-4 mt-4">
                               {selectedProduct.features.map((feature, i) => (
-                                <li key={i} className="flex items-start gap-3 text-stone-700 font-medium">
-                                  <div className="w-6 h-6 rounded-full bg-rose-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <ShieldCheck className="w-3.5 h-3.5 text-rose-500" />
+                                <li key={i} className="flex items-start gap-3 text-stone-900 font-bold">
+                                  <div className="w-6 h-6 rounded-md bg-[#FF90E8] border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] flex items-center justify-center flex-shrink-0 mt-0.5 transform rotate-3">
+                                    <ShieldCheck className="w-3.5 h-3.5 text-stone-900" />
                                   </div>
                                   <span className="leading-relaxed">{feature}</span>
                                 </li>
@@ -1522,18 +1522,18 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                             </ul>
                           </div>
 
-                          {/* 🌟 膠囊化規格與精緻數量選擇區 */}
+                          {/* 規格與數量選擇區 */}
                           {!selectedProduct.isAnnouncement && (
-                            <div className="space-y-8 mb-10 p-8 bg-white rounded-[32px] border-2 border-rose-100 shadow-sm">
+                            <div className="space-y-8 mb-10 p-6 sm:p-8 bg-[#FFFBEB] rounded-2xl border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917]">
                               {selectedProduct.isComboMode ? (
                                 <div className="space-y-6">
                                   {selectedProduct.variants && selectedProduct.variants.length > 0 && (
                                     <div>
-                                      <label className="block text-base font-bold text-stone-800 mb-3">🛒 選擇購買方案</label>
+                                      <label className="block text-base font-black text-stone-900 mb-3">🛒 選擇購買方案</label>
                                       <select
                                         value={selectedVariant}
                                         onChange={(e) => setSelectedVariant(e.target.value)}
-                                        className="w-full p-4 rounded-full border-2 border-rose-200 focus:outline-none focus:border-rose-400 bg-rose-50/30 cursor-pointer font-bold text-stone-700 transition-colors"
+                                        className="w-full p-4 rounded-xl border-2 border-stone-900 focus:outline-none focus:translate-y-[2px] focus:shadow-none bg-white shadow-[3px_3px_0px_0px_#1c1917] cursor-pointer font-black text-stone-900 transition-all appearance-none"
                                       >
                                         <option value="">-- 請先選擇購買方案 --</option>
                                         {selectedProduct.variants.map(v => (
@@ -1544,11 +1544,11 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                   )}
 
                                   {selectedVariant && (
-                                    <div className="space-y-4 pt-6 border-t-2 border-dashed border-rose-100">
-                                      <label className="block text-base font-bold text-stone-800 mb-2">📦 組合包明細分配</label>
+                                    <div className="space-y-4 pt-6 border-t-[3px] border-dashed border-stone-900/20">
+                                      <label className="block text-base font-black text-stone-900 mb-2">📦 組合包明細分配</label>
                                       {comboSelections.map((selection, index) => (
-                                        <div key={selection.id} className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-3xl border-2 border-stone-100 shadow-sm">
-                                          <span className="w-8 h-8 flex items-center justify-center rounded-full bg-stone-100 text-stone-500 font-bold text-sm">#{index + 1}</span>
+                                        <div key={selection.id} className="flex flex-wrap items-center gap-3 p-4 bg-white rounded-xl border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917]">
+                                          <span className="w-8 h-8 flex items-center justify-center rounded-lg bg-stone-900 text-white font-black text-sm">#{index + 1}</span>
                                           {selectedProduct.variantGroups?.map(group => (
                                             <select
                                               key={group.name}
@@ -1558,7 +1558,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                                 newSelections[index].variants[group.name] = e.target.value;
                                                 setComboSelections(newSelections);
                                               }}
-                                              className="flex-1 min-w-[110px] p-3 text-sm font-bold border-2 border-rose-100 rounded-full focus:outline-none focus:border-rose-400 bg-white cursor-pointer"
+                                              className="flex-1 min-w-[110px] p-2.5 text-sm font-bold border-2 border-stone-900 rounded-lg focus:outline-none bg-[#FFFBEB] cursor-pointer appearance-none"
                                             >
                                               <option value="">選擇{group.name}</option>
                                               {group.options.map(opt => (
@@ -1566,8 +1566,8 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                               ))}
                                             </select>
                                           ))}
-                                          <div className="flex items-center gap-2 ml-auto bg-stone-50 rounded-full p-1 border border-stone-200">
-                                            <span className="text-xs text-stone-500 font-bold ml-2">數量</span>
+                                          <div className="flex items-center gap-2 ml-auto bg-[#E0E7FF] rounded-lg p-1 border-2 border-stone-900">
+                                            <span className="text-xs text-stone-900 font-black ml-2">數量</span>
                                             <input
                                               type="number"
                                               min="1"
@@ -1577,17 +1577,17 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                                 newSelections[index].quantity = Math.max(1, parseInt(e.target.value) || 1);
                                                 setComboSelections(newSelections);
                                               }}
-                                              className="w-12 p-1.5 text-center font-bold text-sm bg-transparent focus:outline-none"
+                                              className="w-12 p-1.5 text-center font-black text-sm bg-transparent focus:outline-none"
                                             />
                                           </div>
                                           {comboSelections.length > 1 && (
-                                            <button onClick={() => setComboSelections(comboSelections.filter((_, i) => i !== index))} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition-colors">
+                                            <button onClick={() => setComboSelections(comboSelections.filter((_, i) => i !== index))} className="w-8 h-8 flex items-center justify-center rounded-lg border-2 border-stone-900 bg-[#FF5757] text-white hover:translate-y-[-2px] hover:shadow-[2px_2px_0px_0px_#1c1917] transition-all">
                                               ✕
                                             </button>
                                           )}
                                         </div>
                                       ))}
-                                      <button onClick={() => setComboSelections([...comboSelections, { id: Date.now(), variants: {}, quantity: 1 }])} className="w-full py-4 border-2 border-dashed border-rose-300 text-rose-500 font-bold rounded-full hover:bg-rose-50 transition-colors flex items-center justify-center gap-2 mt-4">
+                                      <button onClick={() => setComboSelections([...comboSelections, { id: Date.now(), variants: {}, quantity: 1 }])} className="w-full py-4 border-[3px] border-dashed border-stone-900 text-stone-900 font-black rounded-xl hover:bg-[#FFD700] transition-colors flex items-center justify-center gap-2 mt-4 bg-white">
                                         <Plus className="w-5 h-5" /> 新增一組明細
                                       </button>
                                     </div>
@@ -1597,16 +1597,16 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                 <div className="space-y-6">
                                   {selectedProduct.variantGroups.map((group, gIdx) => (
                                     <div key={gIdx}>
-                                      <label className="block text-base font-bold text-stone-800 mb-3">{group.name}</label>
+                                      <label className="block text-base font-black text-stone-900 mb-3">{group.name}</label>
                                       <div className="flex flex-wrap gap-3">
                                         {group.options.map((opt) => (
                                           <button
                                             key={opt}
                                             onClick={() => setSelectedVariants(prev => ({ ...prev, [group.name]: prev[group.name] === opt ? '' : opt }))}
-                                            className={`px-6 py-3 rounded-full text-base font-bold transition-all duration-300 border-2 ${
+                                            className={`px-6 py-3 rounded-xl text-base font-black transition-all duration-200 border-2 border-stone-900 ${
                                               selectedVariants[group.name] === opt
-                                                ? 'bg-rose-500 border-rose-500 text-white shadow-lg shadow-rose-500/30'
-                                                : 'bg-white border-rose-200 text-stone-600 hover:border-rose-400 hover:bg-rose-50'
+                                                ? 'bg-[#FF90E8] text-stone-900 shadow-none translate-y-[2px]'
+                                                : 'bg-white text-stone-600 hover:bg-[#FFD700] shadow-[3px_3px_0px_0px_#1c1917] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_0px_#1c1917]'
                                             }`}
                                           >
                                             {opt}
@@ -1618,11 +1618,11 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                 </div>
                               ) : selectedProduct.variants.length > 0 ? (
                                 <div>
-                                  <label className="block text-base font-bold text-stone-800 mb-3">🛒 選擇購買方案</label>
+                                  <label className="block text-base font-black text-stone-900 mb-3">🛒 選擇購買方案</label>
                                   <select
                                     value={selectedVariant}
                                     onChange={(e) => setSelectedVariant(e.target.value)}
-                                    className="w-full p-4 rounded-full border-2 border-rose-200 focus:outline-none focus:border-rose-400 bg-rose-50/30 cursor-pointer font-bold text-stone-700"
+                                    className="w-full p-4 rounded-xl border-2 border-stone-900 focus:outline-none focus:translate-y-[2px] focus:shadow-none bg-white shadow-[3px_3px_0px_0px_#1c1917] cursor-pointer font-black text-stone-900 transition-all appearance-none"
                                   >
                                     <option value="">-- 請選擇購買方案 --</option>
                                     {selectedProduct.variants.map(variant => (
@@ -1632,73 +1632,67 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                                 </div>
                               ) : null}
 
-                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t-2 border-stone-100">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t-[3px] border-stone-900/10">
                                 <div>
-                                  <label className="block text-base font-bold text-stone-800 mb-1">購買數量</label>
+                                  <label className="block text-base font-black text-stone-900 mb-1">購買數量</label>
                                   {selectedProduct.maxLimit && (
-                                    <span className="text-xs text-rose-500 font-bold uppercase tracking-wider bg-rose-100 px-2 py-1 rounded-md">
+                                    <span className="text-xs text-white bg-[#FF5757] font-black uppercase tracking-wider px-2.5 py-1 rounded-md border-2 border-stone-900">
                                       每人限購 {selectedProduct.maxLimit} 件
                                     </span>
                                   )}
                                 </div>
-                                {/* 🌟 可愛質感：實心玫瑰粉膠囊數量選擇器 (一個 + 一個 -) */}
-          <div className="flex items-center gap-4 bg-stone-50 rounded-full border-2 border-stone-100 p-1.5 w-fit shadow-inner">
-            {/* 減號按鈕 (左)：實心玫瑰粉圓 */}
-            <button 
-              onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
-              className="w-10 h-10 rounded-full bg-rose-500 shadow-sm flex items-center justify-center text-white hover:bg-rose-600 transition-colors border border-rose-600"
-            >
-              <Minus className="w-5 h-5" />
-            </button>
-
-            {/* 中間數字 */}
-            <span className="w-10 text-center font-extrabold text-stone-800 text-lg">{selectedQuantity}</span>
-
-            {/* 加號按鈕 (右)：實心玫瑰粉圓 */}
-            <button 
-              onClick={() => {
-                if (selectedProduct.maxLimit && selectedQuantity >= selectedProduct.maxLimit) {
-                  alert(`已達限購數量 ${selectedProduct.maxLimit} 件`);
-                  return;
-                }
-                setSelectedQuantity(selectedQuantity + 1);
-              }}
-              className="w-10 h-10 rounded-full bg-rose-500 shadow-sm flex items-center justify-center text-white hover:bg-rose-600 transition-colors border border-rose-600"
-            >
-              <Plus className="w-5 h-5" />
-            </button>
-          </div>
+                                {/* 🌟 手繪風：積木數量加減器 */}
+                                <div className="flex items-center gap-4 bg-[#E0E7FF] rounded-xl border-2 border-stone-900 p-2 w-fit shadow-[3px_3px_0px_0px_#1c1917]">
+                                  <button 
+                                    onClick={() => setSelectedQuantity(Math.max(1, selectedQuantity - 1))}
+                                    className="w-10 h-10 rounded-lg bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 hover:bg-[#FF5757] hover:text-white active:translate-y-[2px] active:shadow-none transition-all font-black"
+                                  >
+                                    <Minus className="w-5 h-5" />
+                                  </button>
+                                  <span className="w-10 text-center font-black text-stone-900 text-xl">{selectedQuantity}</span>
+                                  <button 
+                                    onClick={() => {
+                                      if (selectedProduct.maxLimit && selectedQuantity >= selectedProduct.maxLimit) {
+                                        alert(`已達限購數量 ${selectedProduct.maxLimit} 件`);
+                                        return;
+                                      }
+                                      setSelectedQuantity(selectedQuantity + 1);
+                                    }}
+                                    className="w-10 h-10 rounded-lg bg-white border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 hover:bg-[#A3E635] hover:text-stone-900 active:translate-y-[2px] active:shadow-none transition-all font-black"
+                                  >
+                                    <Plus className="w-5 h-5" />
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           )}
                         </div>
 
-                        {/* 🌟 大氣化結帳按鈕群組 */}
+                        {/* 🌟 終極大氣手繪風結帳按鈕 */}
                         <div className="mt-auto space-y-4">
-                          <div className="flex flex-col gap-4">
+                          <div className="flex flex-col sm:flex-row gap-4">
                             <button 
                               onClick={() => handleOrderNow(selectedProduct)}
-                              className="w-full bg-stone-800 text-white py-5 rounded-full font-bold text-xl hover:bg-stone-900 transition-all duration-300 shadow-xl shadow-stone-800/20 flex items-center justify-center gap-3"
+                              className="flex-1 bg-[#FF5757] text-white py-5 rounded-2xl font-black text-xl border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#1c1917] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-3"
                             >
                               立即詢問 <ExternalLink className="w-6 h-6" />
                             </button>
                             {!selectedProduct.isAnnouncement && (
                               <button 
                                 onClick={() => handleAddToCart(selectedProduct)}
-                                className="w-full bg-rose-200 text-stone-800 py-5 rounded-full font-bold text-xl hover:bg-rose-300 transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-rose-200/40"
+                                className="flex-1 bg-[#FFD700] text-stone-900 py-5 rounded-2xl font-black text-xl border-[3px] border-stone-900 shadow-[5px_5px_0px_0px_#1c1917] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#1c1917] active:translate-y-[2px] active:shadow-none transition-all flex items-center justify-center gap-3"
                               >
                                 加入購物籃 <ShoppingBag className="w-6 h-6" />
                               </button>
                             )}
                           </div>
                           
-                          {/* 收藏按鈕 */}
                           <button 
                             onClick={() => toggleFavorite(selectedProduct.id)}
-                            className={`w-full py-4 rounded-full border-2 font-bold transition-all duration-300 flex items-center justify-center gap-2 ${
+                            className={`w-full py-4 rounded-xl border-[3px] border-stone-900 font-black transition-all duration-200 flex items-center justify-center gap-2 ${
                               favorites.includes(selectedProduct.id) 
-                                ? 'bg-rose-500 border-rose-500 text-white shadow-md shadow-rose-500/30' 
-                                : 'border-stone-200 text-stone-500 hover:bg-stone-50 hover:border-stone-300'
+                                ? 'bg-[#FF90E8] text-stone-900 shadow-[4px_4px_0px_0px_#1c1917]' 
+                                : 'bg-white text-stone-900 hover:bg-[#FFFBEB] shadow-[4px_4px_0px_0px_#1c1917] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#1c1917]'
                             }`}
                           >
                             <Heart className={`w-5 h-5 ${favorites.includes(selectedProduct.id) ? 'fill-current' : ''}`} />
@@ -1706,7 +1700,7 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
                           </button>
                         </div>
                         
-                        <p className="mt-8 text-center text-sm font-bold text-stone-400">
+                        <p className="mt-8 text-center text-sm font-black text-stone-500 bg-[#FFFBEB] py-2 rounded-lg border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] transform rotate-1 inline-block mx-auto">
                           * 點擊「立即詢問」將由系統為您發送訊息至 林林媽官方 LINE
                         </p>
                       </>
@@ -1999,26 +1993,27 @@ result = result.filter(p => isAdmin || (!isExpired(p.countdownTarget) && p.statu
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="mt-20 py-12 bg-rose-200/30 border-t border-rose-200">
+      {/* 🌟 繽紛手繪風：Footer 頁尾 */}
+      <footer className="mt-20 py-12 bg-[#FFD700] border-t-4 border-stone-900">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-8 h-8 rounded-full bg-rose-200 flex items-center justify-center text-rose-500">
-              <Sparkles className="w-4 h-4 fill-current" />
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-xl bg-[#FF90E8] border-2 border-stone-900 shadow-[3px_3px_0px_0px_#1c1917] flex items-center justify-center text-stone-900 transform rotate-3 hover:rotate-12 transition-transform">
+              <Sparkles className="w-5 h-5 fill-current" />
             </div>
-            <span className="font-bold text-stone-900">林林媽開團小宇宙</span>
+            <span className="font-black text-xl text-stone-900 tracking-tight">林林媽開團小宇宙</span>
           </div>
-          <p className="text-sm text-stone-700/60 mb-8 max-w-md mx-auto">
+          <p className="text-sm font-bold text-stone-800 mb-8 max-w-md mx-auto">
             我們致力於尋找生活中最美好的事物，讓您的每一天都充滿驚喜與健康。
           </p>
-          <div className="flex justify-center gap-6 mb-8">
-            <a href="https://lin.ee/3FkHbsvk" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-stone-700/60 hover:text-rose-500 transition-colors">
-              <span className="font-bold">LINE: @linlinmom2828</span>
+          <div className="flex justify-center gap-4 sm:gap-6 mb-8 font-black">
+            <a href="https://line.me/R/ti/p/@linlinmom2828" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-stone-900 hover:text-[#FF5757] hover:-translate-y-1 transition-all">
+              <span className="bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg">LINE: @linlinmom2828</span>
             </a>
-            <a href="https://www.facebook.com/kellyluo66" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Facebook</a>
-            <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="text-stone-700/40 hover:text-rose-500 transition-colors">Instagram</a>
+            <a href="https://www.facebook.com/kellyluo66" target="_blank" rel="noreferrer" className="text-stone-900 bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg hover:text-[#FF90E8] hover:-translate-y-1 transition-all">FB</a>
+            <a href="https://www.instagram.com/lin_lin_mom66/" target="_blank" rel="noreferrer" className="text-stone-900 bg-white px-3 py-1.5 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg hover:text-[#FF90E8] hover:-translate-y-1 transition-all">IG</a>
           </div>
-          <p className="text-[10px] text-stone-700/30 uppercase tracking-[0.2em]">
-            © 2024 AOI GROUP BUY. ALL RIGHTS RESERVED.
+          <p className="text-xs font-black text-stone-900 uppercase tracking-[0.2em] bg-white inline-block px-4 py-2 border-2 border-stone-900 shadow-[2px_2px_0px_0px_#1c1917] rounded-lg transform -rotate-1">
+            © 2026 AOI GROUP BUY. ALL RIGHTS RESERVED.
           </p>
         </div>
       </footer>
